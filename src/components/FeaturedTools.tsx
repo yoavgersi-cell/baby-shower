@@ -1,68 +1,142 @@
 "use client";
-
 import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import Link from "next/link";
+
+const InvitationIcon = () => (
+  <svg viewBox="0 0 120 80" fill="none" className="w-full h-full">
+    <rect x="10" y="8" width="100" height="64" rx="2" fill="#FAF8F5" stroke="#E8E0D8" strokeWidth="1" />
+    <rect x="18" y="16" width="84" height="48" rx="1" fill="none" stroke="#C4A55A" strokeWidth="0.5" />
+    <circle cx="60" cy="30" r="6" fill="none" stroke="#C4A55A" strokeWidth="0.75" />
+    <line x1="40" y1="42" x2="80" y2="42" stroke="#2C2C2C" strokeWidth="1" opacity="0.25" />
+    <line x1="35" y1="50" x2="85" y2="50" stroke="#2C2C2C" strokeWidth="0.75" opacity="0.15" />
+    <line x1="42" y1="57" x2="78" y2="57" stroke="#2C2C2C" strokeWidth="0.75" opacity="0.15" />
+  </svg>
+);
+
+const PaletteIcon = () => (
+  <svg viewBox="0 0 120 80" fill="none" className="w-full h-full">
+    <circle cx="60" cy="40" r="28" fill="none" stroke="#E8E0D8" strokeWidth="1" />
+    <circle cx="60" cy="40" r="6" fill="#FAF8F5" stroke="#C4A55A" strokeWidth="0.75" />
+    <circle cx="60" cy="18" r="7" fill="#E8C4C4" stroke="#E8E0D8" strokeWidth="0.5" />
+    <circle cx="78" cy="27" r="7" fill="#C4A55A" stroke="#E8E0D8" strokeWidth="0.5" opacity="0.8" />
+    <circle cx="78" cy="53" r="7" fill="#9BAD9B" stroke="#E8E0D8" strokeWidth="0.5" />
+    <circle cx="60" cy="62" r="7" fill="#D4B896" stroke="#E8E0D8" strokeWidth="0.5" />
+    <circle cx="42" cy="53" r="7" fill="#B5785F" stroke="#E8E0D8" strokeWidth="0.5" opacity="0.7" />
+    <circle cx="42" cy="27" r="7" fill="#F5F0E8" stroke="#E8E0D8" strokeWidth="0.5" />
+  </svg>
+);
+
+const BingoIcon = () => (
+  <svg viewBox="0 0 120 80" fill="none" className="w-full h-full">
+    <rect x="15" y="8" width="90" height="64" rx="2" fill="#FAF8F5" stroke="#E8E0D8" strokeWidth="1" />
+    {[0,1,2,3,4].map(col =>
+      [0,1,2,3,4].map(row => (
+        <rect
+          key={`${col}-${row}`}
+          x={20 + col * 17}
+          y={14 + row * 11}
+          width="13"
+          height="8"
+          rx="1"
+          fill={
+            (col === 0 && row === 0) || (col === 2 && row === 2) || (col === 4 && row === 4) || (col === 1 && row === 3)
+              ? "#C4A55A"
+              : (col === 3 && row === 1) || (col === 0 && row === 4)
+              ? "#E8C4C4"
+              : "#F5F0E8"
+          }
+          stroke="#E8E0D8"
+          strokeWidth="0.5"
+        />
+      ))
+    )}
+  </svg>
+);
+
+const ChecklistIcon = () => (
+  <svg viewBox="0 0 120 80" fill="none" className="w-full h-full">
+    <rect x="20" y="6" width="80" height="68" rx="2" fill="#FAF8F5" stroke="#E8E0D8" strokeWidth="1" />
+    <rect x="20" y="6" width="80" height="14" rx="2" fill="#F5F0E8" />
+    {[0,1,2,3,4].map(i => (
+      <g key={i}>
+        <rect x="30" y={28 + i * 10} width="8" height="6" rx="1" fill="none" stroke={i < 3 ? "#C4A55A" : "#E8E0D8"} strokeWidth="0.75" />
+        {i < 3 && (
+          <path d={`M${32} ${30 + i * 10} l2 2 4-3`} stroke="#C4A55A" strokeWidth="0.75" strokeLinecap="round" fill="none" />
+        )}
+        <line x1="44" y1={31 + i * 10} x2={i < 3 ? 76 : 68} y2={31 + i * 10} stroke="#2C2C2C" strokeWidth="0.5" opacity="0.2" />
+      </g>
+    ))}
+  </svg>
+);
+
+const RSVPIcon = () => (
+  <svg viewBox="0 0 120 80" fill="none" className="w-full h-full">
+    <rect x="15" y="10" width="90" height="60" rx="6" fill="#FAF8F5" stroke="#E8E0D8" strokeWidth="1" />
+    <rect x="15" y="10" width="90" height="16" rx="6" fill="#F5F0E8" />
+    <rect x="15" y="20" width="90" height="6" fill="#F5F0E8" />
+    <circle cx="28" cy="18" r="4" fill="#E8C4C4" />
+    <circle cx="40" cy="18" r="4" fill="#9BAD9B" />
+    <circle cx="52" cy="18" r="4" fill="#D4B896" />
+    <rect x="30" y="36" width="60" height="8" rx="2" fill="#2C2C2C" opacity="0.06" />
+    <line x1="30" y1="54" x2="65" y2="54" stroke="#E8E0D8" strokeWidth="1" />
+    <circle cx="72" cy="54" r="6" fill="none" stroke="#C4A55A" strokeWidth="0.75" />
+    <path d="M69 54 l2 2 4-4" stroke="#C4A55A" strokeWidth="0.75" strokeLinecap="round" fill="none" />
+  </svg>
+);
+
+const PrintableStackIcon = () => (
+  <svg viewBox="0 0 120 80" fill="none" className="w-full h-full">
+    <rect x="30" y="22" width="64" height="48" rx="2" fill="#F5F0E8" stroke="#E8E0D8" strokeWidth="1" transform="rotate(6 30 22)" />
+    <rect x="26" y="18" width="64" height="48" rx="2" fill="#FAF8F5" stroke="#E8E0D8" strokeWidth="1" transform="rotate(2 26 18)" />
+    <rect x="22" y="14" width="64" height="48" rx="2" fill="white" stroke="#E8E0D8" strokeWidth="1" />
+    <line x1="32" y1="30" x2="76" y2="30" stroke="#C4A55A" strokeWidth="0.75" opacity="0.6" />
+    <line x1="32" y1="38" x2="72" y2="38" stroke="#2C2C2C" strokeWidth="0.5" opacity="0.15" />
+    <line x1="32" y1="45" x2="68" y2="45" stroke="#2C2C2C" strokeWidth="0.5" opacity="0.15" />
+    <line x1="32" y1="52" x2="70" y2="52" stroke="#2C2C2C" strokeWidth="0.5" opacity="0.15" />
+  </svg>
+);
 
 const tools = [
   {
-    emoji: "💌",
-    name: "Invitation Maker",
-    description: "Design stunning custom invitations in minutes with our drag & drop editor.",
-    gradient: "linear-gradient(135deg, #fce8f1 0%, #f9d0e3 50%, #f4a8c7 100%)",
-    accentColor: "#cd2d62",
-    bgAccent: "#fdf4f7",
-    patternColor: "#f9d0e3",
+    name: "Create Your Invitations",
+    description: "Design bespoke invitations with curated templates and elegant typesetting.",
+    icon: <InvitationIcon />,
+    href: "/tools/invitations",
     badge: "Most Popular",
   },
   {
-    emoji: "🎮",
-    name: "Game Generator",
-    description: "Auto-generate fun, printable baby shower games your guests will love.",
-    gradient: "linear-gradient(135deg, #e6ede6 0%, #cddccd 50%, #a8c2a8 100%)",
-    accentColor: "#486948",
-    bgAccent: "#f4f7f4",
-    patternColor: "#cddccd",
+    name: "Design Your Theme",
+    description: "Discover your perfect theme palette through our curated style finder.",
+    icon: <PaletteIcon />,
+    href: "/tools/theme",
     badge: null,
   },
   {
-    emoji: "✨",
-    name: "Theme Finder Quiz",
-    description: "Find your perfect baby shower theme in 60 seconds with our smart quiz.",
-    gradient: "linear-gradient(135deg, #fff5f0 0%, #ffd0b8 50%, #ffb088 100%)",
-    accentColor: "#f04010",
-    bgAccent: "#fff5f0",
-    patternColor: "#ffd0b8",
+    name: "Build Your Games",
+    description: "Generate printable bingo cards and party games in moments.",
+    icon: <BingoIcon />,
+    href: "/tools/games",
+    badge: null,
+  },
+  {
+    name: "Print Your Checklist",
+    description: "The complete planning checklist so nothing is ever overlooked.",
+    icon: <ChecklistIcon />,
+    href: "/tools/checklist",
+    badge: null,
+  },
+  {
+    name: "Launch Your RSVP Site",
+    description: "A beautiful, shareable RSVP page — live in minutes, no code needed.",
+    icon: <RSVPIcon />,
+    href: "/tools/rsvp",
     badge: "New",
   },
   {
-    emoji: "✅",
-    name: "Printable Checklist",
-    description: "The ultimate baby shower planning checklist — never forget a single detail.",
-    gradient: "linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%)",
-    accentColor: "#7c3aed",
-    bgAccent: "#faf5ff",
-    patternColor: "#ddd6fe",
-    badge: null,
-  },
-  {
-    emoji: "🌐",
-    name: "RSVP Website",
-    description: "Create a beautiful, shareable RSVP page in minutes — no coding needed.",
-    gradient: "linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #7dd3fc 100%)",
-    accentColor: "#0369a1",
-    bgAccent: "#f0f9ff",
-    patternColor: "#bae6fd",
-    badge: null,
-  },
-  {
-    emoji: "🎯",
-    name: "Bingo Generator",
-    description: "Instant, customizable baby shower bingo cards — print or play digitally.",
-    gradient: "linear-gradient(135deg, #ccfbf1 0%, #99f6e4 50%, #5eead4 100%)",
-    accentColor: "#0f766e",
-    bgAccent: "#f0fdfa",
-    patternColor: "#99f6e4",
+    name: "Curate Your Printables",
+    description: "Browse and download a full suite of coordinated printable designs.",
+    icon: <PrintableStackIcon />,
+    href: "/tools/printables",
     badge: null,
   },
 ];
@@ -70,130 +144,107 @@ const tools = [
 function ToolCard({ tool, index }: { tool: typeof tools[0]; index: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -6, scale: 1.02 }}
-      className="group relative bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer"
-      style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="group relative bg-white border border-[#E8E0D8] hover:border-[#C4A55A]/50 hover:shadow-lg transition-all duration-300 flex flex-col"
     >
-      {/* Card gradient header */}
-      <div
-        className="relative h-36 flex items-center justify-center overflow-hidden"
-        style={{ background: tool.gradient }}
-      >
-        {/* Pattern overlay */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle, ${tool.patternColor}88 1px, transparent 1px)`,
-            backgroundSize: "20px 20px",
-            opacity: 0.5,
-          }}
-        />
-        {/* Badge */}
-        {tool.badge && (
-          <div
-            className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-bold text-white"
-            style={{ background: tool.accentColor }}
+      {/* Badge */}
+      {tool.badge && (
+        <div className="absolute top-4 right-4 z-10">
+          <span
+            className="text-[9px] tracking-[0.15em] uppercase text-[#C4A55A] border border-[#C4A55A]/40 px-2 py-0.5"
+            style={{ fontFamily: "var(--font-ui)" }}
           >
             {tool.badge}
-          </div>
-        )}
-        {/* Emoji */}
-        <span
-          className="relative text-5xl group-hover:scale-110 transition-transform duration-300 select-none"
-          style={{ filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.1))" }}
-        >
-          {tool.emoji}
-        </span>
+          </span>
+        </div>
+      )}
+
+      {/* Icon area */}
+      <div className="h-40 p-6 flex items-center justify-center bg-[#FAF8F5] border-b border-[#E8E0D8] overflow-hidden">
+        <div className="w-full h-full max-w-[160px]">{tool.icon}</div>
       </div>
 
-      {/* Card body */}
-      <div className="p-6">
+      {/* Content */}
+      <div className="p-6 flex flex-col flex-1">
         <h3
-          className="text-lg font-bold text-gray-800 mb-2"
-          style={{ fontFamily: "var(--font-playfair), serif" }}
+          className="text-lg text-[#2C2C2C] mb-2 leading-snug"
+          style={{ fontFamily: "var(--font-heading)", fontWeight: 500 }}
         >
           {tool.name}
         </h3>
         <p
-          className="text-sm text-gray-500 leading-relaxed mb-5"
-          style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+          className="text-sm text-[#2C2C2C]/55 leading-relaxed mb-5 flex-1"
+          style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
         >
           {tool.description}
         </p>
-        <button
-          className="inline-flex items-center gap-1.5 text-sm font-bold transition-all duration-200 hover:gap-2.5"
-          style={{ color: tool.accentColor, fontFamily: "var(--font-nunito), sans-serif" }}
+        <Link
+          href={tool.href}
+          className="inline-flex items-center gap-2 text-[11px] tracking-[0.1em] uppercase text-[#2C2C2C]/60 hover:text-[#2C2C2C] transition-colors group-hover:gap-3 duration-300"
+          style={{ fontFamily: "var(--font-ui)" }}
         >
-          Try Free
-          <span className="text-base">→</span>
-        </button>
+          Begin
+          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </Link>
       </div>
-
-      {/* Bottom accent line */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: tool.gradient }}
-      />
     </motion.div>
   );
 }
 
 export default function FeaturedTools() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="tools" className="py-20 md:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="tools" className="py-24 md:py-32 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16" ref={ref}>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+        <div className="mb-16 max-w-xl">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-xs font-bold uppercase tracking-widest text-blush-500 mb-3"
-            style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+            className="flex items-center gap-3 mb-6"
           >
-            Planning Tools
-          </motion.p>
+            <div className="w-8 h-px bg-[#C4A55A]" />
+            <span
+              className="text-[10px] tracking-[0.25em] uppercase text-[#C4A55A]"
+              style={{ fontFamily: "var(--font-ui)" }}
+            >
+              Planning Tools
+            </span>
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-playfair), serif" }}
+            className="text-[#2C2C2C] leading-tight mb-4"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 300,
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+            }}
           >
-            Everything You Need to Plan
-            <br />
-            <span
-              style={{
-                background: "linear-gradient(135deg, #e04880, #cd2d62)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              the Perfect Shower
-            </span>
+            Your Planning Journey
           </motion.h2>
+
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-lg text-gray-500 max-w-2xl mx-auto"
-            style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+            className="text-[#2C2C2C]/55 text-base leading-relaxed"
+            style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
           >
-            From invitations to games to printables — our free tools make planning easy,
-            beautiful, and stress-free.
+            From inspiration to the perfect celebration
           </motion.p>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[#E8E0D8]">
           {tools.map((tool, index) => (
             <ToolCard key={tool.name} tool={tool} index={index} />
           ))}
@@ -205,16 +256,16 @@ export default function FeaturedTools() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mt-14"
+          className="mt-14 flex items-center gap-4"
         >
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-blush-50 hover:bg-blush-100 text-blush-600 font-bold text-base rounded-2xl border-2 border-blush-200 hover:border-blush-300 transition-all duration-300 hover:scale-105"
-            style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+          <div className="w-8 h-px bg-[#E8E0D8]" />
+          <Link
+            href="/tools"
+            className="text-[11px] tracking-[0.15em] uppercase text-[#2C2C2C]/50 hover:text-[#2C2C2C] transition-colors"
+            style={{ fontFamily: "var(--font-ui)" }}
           >
             View All Tools
-            <span>→</span>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

@@ -1,75 +1,60 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Nunito } from "next/font/google";
+import { Cormorant_Garamond, Playfair_Display, Inter, Manrope } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-display",
   display: "swap",
 });
 
-const nunito = Nunito({
-  variable: "--font-nunito",
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "700"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-ui",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Plan My Baby Shower | Free Baby Shower Planner, Invitations & Games",
+  title: "Plan My Baby Shower | Premium Baby Shower Planning & Inspiration",
   description:
-    "Plan the perfect baby shower with free invitations, printable games, themes, and checklists. The #1 baby shower planning platform.",
+    "Discover curated baby shower themes, invitations, printables, and planning tools. The premium platform for creating an unforgettable baby shower.",
   keywords:
-    "baby shower, baby shower themes, baby shower games, baby shower invitations, baby shower printables, baby shower planner, baby shower ideas",
-  authors: [{ name: "Plan My Baby Shower" }],
+    "baby shower themes, baby shower invitations, baby shower planning, baby shower printables, baby shower inspiration",
   openGraph: {
-    title: "Plan My Baby Shower | Free Baby Shower Planner, Invitations & Games",
+    title: "Plan My Baby Shower | Premium Baby Shower Planning & Inspiration",
     description:
-      "Plan the perfect baby shower with free invitations, printable games, themes, and checklists. The #1 baby shower planning platform.",
-    url: "https://planmybabyshower.com",
-    siteName: "Plan My Baby Shower",
+      "Curated themes, invitations, and tools for the perfect baby shower.",
     type: "website",
-    locale: "en_US",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Plan My Baby Shower - The #1 Baby Shower Planning Platform",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Plan My Baby Shower | Free Baby Shower Planner",
-    description:
-      "Plan the perfect baby shower with free invitations, printable games, themes, and checklists.",
-    images: ["/og-image.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <head>
-        <meta name="theme-color" content="#e04880" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-      </head>
-      <body
-        className={`${playfair.variable} ${nunito.variable} antialiased bg-cream-50`}
-        style={{ fontFamily: "var(--font-nunito), Nunito, sans-serif" }}
-      >
-        {children}
-      </body>
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${playfair.variable} ${inter.variable} ${manrope.variable}`}
+    >
+      <body>{children}</body>
     </html>
   );
 }

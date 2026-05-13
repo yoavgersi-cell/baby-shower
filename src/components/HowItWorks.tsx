@@ -1,37 +1,25 @@
 "use client";
-
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const steps = [
   {
-    step: "01",
-    emoji: "🎨",
+    number: "01",
     title: "Choose Your Theme",
     description:
-      "Browse 500+ beautiful themes or take our 60-second quiz to find your perfect match. From boho florals to safari adventures — there's a theme for every mama.",
-    color: "#e04880",
-    bg: "linear-gradient(135deg, #fdf4f7, #fce8f1)",
-    border: "#f9d0e3",
+      "Browse our curated collection of 500+ themes or take our style finder to discover the palette and aesthetic that speaks to you.",
   },
   {
-    step: "02",
-    emoji: "✏️",
-    title: "Customize Everything",
+    number: "02",
+    title: "Customise Everything",
     description:
-      "Personalize your invitations, games, and printables with our easy drag-and-drop tools. Add your name, date, and details — then make it uniquely yours.",
-    color: "#486948",
-    bg: "linear-gradient(135deg, #f4f7f4, #e6ede6)",
-    border: "#cddccd",
+      "Personalise invitations, games, and printables with your details. Our tools make editing intuitive and the results look professionally designed.",
   },
   {
-    step: "03",
-    emoji: "🎉",
+    number: "03",
     title: "Share & Celebrate",
     description:
-      "Download and print your creations, or share digital versions instantly. Your guests will be amazed — and you can finally relax and enjoy the shower!",
-    color: "#d49a23",
-    bg: "linear-gradient(135deg, #fefdf8, #fdf9ec)",
-    border: "#fbf0cc",
+      "Download and print your creations, or share digital versions instantly. Your guests will be delighted — and you can relax and savour the day.",
   },
 ];
 
@@ -39,128 +27,120 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="py-20 md:py-28"
-      style={{ background: "linear-gradient(180deg, #fefdf8 0%, #fdf4f7 50%, #fefdf8 100%)" }}
+      className="py-24 md:py-32"
+      style={{ background: "#FDFBF7" }}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
+        <div className="max-w-xl mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-xs font-bold uppercase tracking-widest text-blush-500 mb-3"
+            className="flex items-center gap-3 mb-6"
           >
-            How It Works
-          </motion.p>
+            <div className="w-8 h-px bg-[#C4A55A]" />
+            <span
+              className="text-[10px] tracking-[0.25em] uppercase text-[#C4A55A]"
+              style={{ fontFamily: "var(--font-ui)" }}
+            >
+              How It Works
+            </span>
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-playfair), serif" }}
+            className="text-[#2C2C2C] leading-tight"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 300,
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+            }}
           >
-            Plan Your Dream Shower
-            <br />
-            <span
-              style={{
-                background: "linear-gradient(135deg, #e04880, #cd2d62)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              in 3 Simple Steps
-            </span>
+            Plan Your Dream Shower in Three Steps
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto"
-            style={{ fontFamily: "var(--font-nunito), sans-serif" }}
-          >
-            No design experience needed. We make it easy for every mama and party planner.
-          </motion.p>
         </div>
 
         {/* Steps */}
-        <div className="relative">
+        <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           {/* Connecting line (desktop) */}
-          <div className="hidden lg:block absolute top-20 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-blush-200 via-sage-200 to-cream-300 z-0" />
+          <div
+            className="hidden lg:block absolute top-10 left-[16.5%] right-[16.5%] h-px"
+            style={{ background: "#E8E0D8" }}
+          />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 relative z-10">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.step}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.7, delay: index * 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col items-center text-center"
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.number}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.7, delay: index * 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="relative flex flex-col"
+            >
+              {/* Step number — large, thin */}
+              <div
+                className="text-[5rem] leading-none text-[#2C2C2C]/08 mb-6 select-none"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 300,
+                  color: "rgba(44,44,44,0.08)",
+                  lineHeight: 1,
+                  fontSize: "5rem",
+                }}
               >
-                {/* Step circle */}
-                <div className="relative mb-6">
-                  {/* Outer ring */}
-                  <div
-                    className="w-24 h-24 rounded-full flex items-center justify-center relative"
-                    style={{
-                      background: step.bg,
-                      border: `2px solid ${step.border}`,
-                      boxShadow: `0 8px 32px ${step.color}20`,
-                    }}
-                  >
-                    <span className="text-4xl">{step.emoji}</span>
-                    {/* Step number badge */}
-                    <div
-                      className="absolute -top-2 -right-2 w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-md"
-                      style={{ background: step.color }}
-                    >
-                      {index + 1}
-                    </div>
-                  </div>
+                {step.number}
+              </div>
+
+              {/* Step dot on line */}
+              <div className="absolute top-[2.2rem] left-0">
+                <div className="w-4 h-4 rounded-full border-2 border-[#C4A55A] bg-[#FDFBF7]" />
+              </div>
+
+              <h3
+                className="text-xl text-[#2C2C2C] mb-3"
+                style={{ fontFamily: "var(--font-heading)", fontWeight: 500 }}
+              >
+                {step.title}
+              </h3>
+              <p
+                className="text-sm text-[#2C2C2C]/55 leading-relaxed"
+                style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+              >
+                {step.description}
+              </p>
+
+              {/* Mobile step arrow */}
+              {index < steps.length - 1 && (
+                <div className="lg:hidden mt-8 flex items-center gap-2">
+                  <div className="flex-1 h-px bg-[#E8E0D8]" />
+                  <span className="text-[#E8E0D8] text-sm">↓</span>
                 </div>
-
-                {/* Arrow between steps (mobile) */}
-                {index < steps.length - 1 && (
-                  <div className="lg:hidden text-2xl mb-6 text-gray-300 rotate-90">→</div>
-                )}
-
-                <h3
-                  className="text-xl md:text-2xl font-bold text-gray-800 mb-3"
-                  style={{ fontFamily: "var(--font-playfair), serif", color: step.color }}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  className="text-gray-500 text-sm sm:text-base leading-relaxed max-w-xs"
-                  style={{ fontFamily: "var(--font-nunito), sans-serif" }}
-                >
-                  {step.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+              )}
+            </motion.div>
+          ))}
         </div>
 
-        {/* Bottom CTA */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mt-16"
+          className="mt-20 flex items-center gap-6"
         >
-          <a
-            href="#tools"
-            className="inline-flex items-center gap-2 px-10 py-4 bg-blush-500 hover:bg-blush-600 text-white font-bold text-base rounded-2xl shadow-lg shadow-blush-200 hover:shadow-xl hover:shadow-blush-300 transition-all duration-300 hover:scale-105 hover:-translate-y-0.5"
-            style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+          <Link
+            href="/start"
+            className="inline-block px-8 py-4 bg-[#2C2C2C] text-white text-[11px] tracking-[0.15em] uppercase hover:bg-[#3D2B1F] transition-colors duration-300"
+            style={{ fontFamily: "var(--font-ui)" }}
           >
-            🎀 Start Planning — It&apos;s Free
-          </a>
+            Start Planning — It&apos;s Free
+          </Link>
+          <div className="w-8 h-px bg-[#E8E0D8]" />
         </motion.div>
       </div>
     </section>

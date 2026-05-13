@@ -1,213 +1,157 @@
 "use client";
-
 import { motion } from "framer-motion";
 
 const testimonials = [
   {
-    initials: "SE",
     name: "Sarah E.",
-    role: "Mom of Lily",
+    role: "Mother of Lily",
+    theme: "Garden Botanica Theme",
     quote:
-      "I planned my entire baby shower in one afternoon using this platform. The invitation maker is stunning — my guests thought I hired a designer! The teddy bear theme was absolutely perfect for our little one.",
-    rating: 5,
-    avatarBg: "linear-gradient(135deg, #fce8f1, #f4a8c7)",
-    avatarColor: "#cd2d62",
-    theme: "Teddy Bear Theme",
+      "I planned my entire baby shower in one afternoon using this platform. The invitation maker is stunning — my guests thought I hired a designer. The botanical theme was absolutely perfect for our little one.",
   },
   {
-    initials: "MK",
     name: "Michelle K.",
-    role: "Mom of twins Oliver & Ava",
+    role: "Mother of twins Oliver & Ava",
+    theme: "Neutral Luxe Theme",
     quote:
-      "The bingo generator saved me so much stress! We printed 20 cards in minutes and everyone had a blast. The garden party theme was exactly the aesthetic I wanted. 10/10 would recommend to every mama-to-be.",
-    rating: 5,
-    avatarBg: "linear-gradient(135deg, #e6ede6, #a8c2a8)",
-    avatarColor: "#3b543b",
-    theme: "Garden Party Theme",
+      "The bingo generator saved me so much stress. We printed 20 cards in minutes and everyone had a wonderful time. The neutral luxe aesthetic was exactly what I wanted — refined without being cold.",
   },
   {
-    initials: "JP",
     name: "Jessica P.",
-    role: "Mom of Noah",
+    role: "Mother of Noah",
+    theme: "Safari Serenity Theme",
     quote:
-      "The RSVP website feature is a game changer. I just sent the link and tracked responses in real time — no more chasing people down! Everything from the checklist to the printables was beautiful and professional.",
-    rating: 5,
-    avatarBg: "linear-gradient(135deg, #fff5f0, #ffb088)",
-    avatarColor: "#c82e0e",
-    theme: "Safari Adventure Theme",
+      "The RSVP website feature is a genuine game changer. I simply sent the link and tracked responses in real time. Everything from the checklist to the printables felt beautiful and considered.",
   },
 ];
 
-function StarRating({ count }: { count: number }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: count }).map((_, i) => (
-        <svg key={i} width="16" height="16" viewBox="0 0 24 24" fill="#e8b83a">
-          <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
-        </svg>
-      ))}
-    </div>
-  );
-}
+const stats = [
+  { value: "50,000+", label: "Showers Planned" },
+  { value: "4.9 / 5", label: "Average Rating" },
+  { value: "500+", label: "Themes Available" },
+  { value: "100%", label: "Free to Start" },
+];
 
 export default function Testimonials() {
   return (
     <section
-      className="py-20 md:py-28"
-      style={{ background: "linear-gradient(180deg, #fdf4f7 0%, #fefdf8 100%)" }}
+      className="py-24 md:py-32"
+      style={{ background: "#FAF8F5" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
+        <div className="max-w-xl mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-xs font-bold uppercase tracking-widest text-blush-500 mb-3"
+            className="flex items-center gap-3 mb-6"
           >
-            Mama Love
-          </motion.p>
+            <div className="w-8 h-px bg-[#C4A55A]" />
+            <span
+              className="text-[10px] tracking-[0.25em] uppercase text-[#C4A55A]"
+              style={{ fontFamily: "var(--font-ui)" }}
+            >
+              Kind Words
+            </span>
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-playfair), serif" }}
+            className="text-[#2C2C2C] leading-tight"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 300,
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+            }}
           >
-            50,000+ Mamas
-            <br />
-            <span
-              style={{
-                background: "linear-gradient(135deg, #e04880, #cd2d62)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Are Planning Their Dream Shower
-            </span>
+            From the Celebrations We&apos;ve Helped Create
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto"
-            style={{ fontFamily: "var(--font-nunito), sans-serif" }}
-          >
-            Real stories from real mamas who made their special day unforgettable.
-          </motion.p>
         </div>
 
         {/* Testimonials grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {testimonials.map((t, index) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.7, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -4 }}
-              className="bg-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col gap-5 relative overflow-hidden"
-              style={{ boxShadow: "0 2px 24px rgba(0,0,0,0.07)" }}
+              transition={{ duration: 0.7, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="flex flex-col"
             >
-              {/* Decorative circle */}
+              {/* Large quotation mark */}
               <div
-                className="absolute -top-6 -right-6 w-24 h-24 rounded-full opacity-20"
-                style={{ background: t.avatarBg }}
-              />
-
-              {/* Quote mark */}
-              <div
-                className="text-5xl leading-none font-bold opacity-20"
-                style={{ color: t.avatarColor, fontFamily: "Georgia, serif", lineHeight: 1 }}
+                className="text-[80px] leading-none text-[#E8E0D8] mb-2 select-none"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 300,
+                  lineHeight: 0.8,
+                }}
               >
-                "
+                &ldquo;
               </div>
-
-              {/* Stars */}
-              <StarRating count={t.rating} />
 
               {/* Quote */}
               <p
-                className="text-gray-600 text-sm sm:text-base leading-relaxed flex-1 -mt-2"
-                style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+                className="text-[#2C2C2C]/70 text-base leading-relaxed mb-6 flex-1 italic"
+                style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "1.05rem" }}
               >
-                "{t.quote}"
+                {t.quote}
               </p>
 
-              {/* Theme tag */}
-              <div
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold w-fit"
-                style={{
-                  background: t.avatarBg,
-                  color: t.avatarColor,
-                }}
-              >
-                <span>🎀</span>
-                {t.theme}
-              </div>
+              {/* Separator */}
+              <div className="w-8 h-px bg-[#E8E0D8] mb-5" />
 
               {/* Author */}
-              <div className="flex items-center gap-3 pt-1 border-t border-gray-100">
-                <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold shadow-sm flex-shrink-0"
-                  style={{
-                    background: t.avatarBg,
-                    color: t.avatarColor,
-                    border: `2px solid ${t.avatarColor}30`,
-                  }}
+              <div>
+                <p
+                  className="text-sm text-[#2C2C2C] mb-0.5"
+                  style={{ fontFamily: "var(--font-body)", fontWeight: 500 }}
                 >
-                  {t.initials}
-                </div>
-                <div>
-                  <p
-                    className="text-sm font-bold text-gray-800"
-                    style={{ fontFamily: "var(--font-nunito), sans-serif" }}
-                  >
-                    {t.name}
-                  </p>
-                  <p className="text-xs text-gray-400">{t.role}</p>
-                </div>
-                <div className="ml-auto">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
+                  {t.name}
+                </p>
+                <p
+                  className="text-[11px] tracking-[0.1em] uppercase text-[#2C2C2C]/40"
+                  style={{ fontFamily: "var(--font-ui)" }}
+                >
+                  {t.role}
+                </p>
+                <p
+                  className="text-[10px] tracking-[0.08em] uppercase text-[#C4A55A] mt-1"
+                  style={{ fontFamily: "var(--font-ui)" }}
+                >
+                  {t.theme}
+                </p>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Social proof bar */}
+        {/* Stats row */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-14 bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-blush-100"
+          className="border-t border-[#E8E0D8] pt-12"
         >
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            {[
-              { value: "50,000+", label: "Happy Mamas", icon: "💕" },
-              { value: "4.9/5", label: "Average Rating", icon: "⭐" },
-              { value: "500+", label: "Themes Available", icon: "🎨" },
-              { value: "100%", label: "Free to Start", icon: "🆓" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-2xl mb-1">{stat.icon}</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat) => (
+              <div key={stat.label} className="text-center md:text-left">
                 <div
-                  className="text-2xl md:text-3xl font-bold text-gray-800"
-                  style={{ fontFamily: "var(--font-playfair), serif" }}
+                  className="text-3xl text-[#2C2C2C] mb-1"
+                  style={{ fontFamily: "var(--font-display)", fontWeight: 300 }}
                 >
                   {stat.value}
                 </div>
                 <div
-                  className="text-sm text-gray-500 font-medium"
-                  style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+                  className="text-[10px] tracking-[0.15em] uppercase text-[#2C2C2C]/45"
+                  style={{ fontFamily: "var(--font-ui)" }}
                 >
                   {stat.label}
                 </div>

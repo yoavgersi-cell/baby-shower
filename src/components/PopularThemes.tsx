@@ -1,165 +1,201 @@
 "use client";
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const themes = [
   {
-    name: "Teddy Bear",
-    category: "Neutral",
-    emojis: ["🧸", "🎀", "🍯"],
-    gradient: "linear-gradient(160deg, #fbf0cc 0%, #ffd0b8 50%, #f7e4a1 100%)",
-    overlayColor: "rgba(139, 94, 27, 0.7)",
-    saves: "14.2k",
-    trending: true,
-  },
-  {
-    name: "Safari Adventure",
-    category: "Safari",
-    emojis: ["🦒", "🦁", "🌿"],
-    gradient: "linear-gradient(160deg, #fdf9ec 0%, #f7e4a1 40%, #cddccd 100%)",
-    overlayColor: "rgba(74, 57, 22, 0.7)",
-    saves: "11.8k",
-    trending: true,
-  },
-  {
-    name: "Boho Floral",
-    category: "Boho",
-    emojis: ["🌸", "🌾", "🦋"],
-    gradient: "linear-gradient(160deg, #fce8f1 0%, #ffd0b8 40%, #f9d0e3 100%)",
-    overlayColor: "rgba(100, 50, 50, 0.7)",
-    saves: "9.5k",
-    trending: false,
-  },
-  {
-    name: "Garden Party",
+    name: "Garden Botanica",
     category: "Floral",
-    emojis: ["🌷", "🌿", "🍃"],
-    gradient: "linear-gradient(160deg, #e6ede6 0%, #cddccd 50%, #a8c2a8 100%)",
-    overlayColor: "rgba(31, 54, 31, 0.75)",
-    saves: "8.1k",
-    trending: false,
+    description: "Lush botanical prints, pressed flower arrangements, and sage green linens",
+    palette: ["#9BAD9B", "#E8C4C4", "#F5F0E8", "#D4B896"],
+    bgColors: ["#E8F0E8", "#F5F0E8", "#E8C4C4", "#D4B896"],
+    tall: true,
   },
   {
     name: "Neutral Luxe",
     category: "Neutral",
-    emojis: ["✨", "🤍", "🎀"],
-    gradient: "linear-gradient(160deg, #fefdf8 0%, #fdf9ec 50%, #fbf0cc 100%)",
-    overlayColor: "rgba(80, 70, 50, 0.7)",
-    saves: "17.3k",
-    trending: true,
+    description: "Warm neutrals, champagne tones, and organic textures for an effortlessly chic celebration",
+    palette: ["#F5F0E8", "#D4B896", "#C4A55A", "#3D2B1F"],
+    bgColors: ["#FAF8F5", "#F5F0E8", "#E8E0D8", "#D4B896"],
+    tall: false,
   },
   {
-    name: "Blue Bear",
+    name: "Safari Serenity",
+    category: "Safari",
+    description: "Golden savanna hues, natural textures, and elegant wildlife-inspired accents",
+    palette: ["#D4B896", "#C4A55A", "#9BAD9B", "#3D2B1F"],
+    bgColors: ["#F0E8D8", "#D4B896", "#C4A55A", "#E8F0E8"],
+    tall: true,
+  },
+  {
+    name: "Blush & Ivory",
+    category: "Floral",
+    description: "Soft blush roses, ivory linen, and delicate gold details for timeless elegance",
+    palette: ["#E8C4C4", "#FAF8F5", "#C4A55A", "#B5785F"],
+    bgColors: ["#F8EEE8", "#E8C4C4", "#F5F0E8", "#D4B896"],
+    tall: true,
+  },
+  {
+    name: "Midnight Garden",
     category: "Classic",
-    emojis: ["🧸", "💙", "☁️"],
-    gradient: "linear-gradient(160deg, #e0f2fe 0%, #bae6fd 50%, #93c5fd 100%)",
-    overlayColor: "rgba(30, 58, 138, 0.7)",
-    saves: "7.6k",
-    trending: false,
+    description: "Deep emerald, black, and gold for a sophisticated evening garden party",
+    palette: ["#2C2C2C", "#3D2B1F", "#C4A55A", "#9BAD9B"],
+    bgColors: ["#2C2C2C", "#3D2B1F", "#1A1A1A", "#4A5A4A"],
+    tall: false,
   },
   {
-    name: "Pink Bow",
-    category: "Classic",
-    emojis: ["🎀", "💕", "🌸"],
-    gradient: "linear-gradient(160deg, #fdf4f7 0%, #fce8f1 50%, #f9d0e3 100%)",
-    overlayColor: "rgba(139, 28, 66, 0.7)",
-    saves: "12.9k",
-    trending: true,
-  },
-  {
-    name: "Woodland",
+    name: "Boho Desert",
     category: "Boho",
-    emojis: ["🦔", "🍄", "🌲"],
-    gradient: "linear-gradient(160deg, #e6ede6 0%, #a8c2a8 40%, #7ea27e 100%)",
-    overlayColor: "rgba(20, 40, 20, 0.75)",
-    saves: "6.4k",
-    trending: false,
+    description: "Terracotta, rust, and cream with pampas grass and macramé textures",
+    palette: ["#B5785F", "#C4A55A", "#F5F0E8", "#9BAD9B"],
+    bgColors: ["#E8C4A8", "#B5785F", "#F0E0D0", "#C4A55A"],
+    tall: true,
   },
   {
-    name: "Moon & Stars",
+    name: "Classic Blue",
     category: "Classic",
-    emojis: ["🌙", "⭐", "🌟"],
-    gradient: "linear-gradient(160deg, #e0e7ff 0%, #c7d2fe 40%, #818cf8 100%)",
-    overlayColor: "rgba(10, 20, 80, 0.75)",
-    saves: "10.2k",
-    trending: false,
+    description: "Navy and powder blue with crisp white linens and silver accents",
+    palette: ["#4A6B8A", "#9BBAD4", "#F5F0E8", "#C4A55A"],
+    bgColors: ["#E8F0F8", "#9BBAD4", "#4A6B8A", "#F5F0E8"],
+    tall: true,
+  },
+  {
+    name: "Pink Peonies",
+    category: "Floral",
+    description: "Blush and dusty rose with lush peony arrangements and soft gold",
+    palette: ["#E8C4C4", "#C9927A", "#B5785F", "#F5F0E8"],
+    bgColors: ["#F8E0E0", "#E8C4C4", "#C9927A", "#FAF8F5"],
+    tall: false,
+  },
+  {
+    name: "Woodland Whimsy",
+    category: "Boho",
+    description: "Moss, birch, and wild mushroom tones for a forest-inspired gathering",
+    palette: ["#9BAD9B", "#6B8A6B", "#D4B896", "#3D2B1F"],
+    bgColors: ["#E8F0E8", "#9BAD9B", "#6B8A6B", "#D4B896"],
+    tall: true,
   },
 ];
 
 const filters = ["All", "Neutral", "Floral", "Safari", "Boho", "Classic"];
 
-function ThemeCard({ theme, index }: { theme: typeof themes[0]; index: number }) {
-  const [saved, setSaved] = useState(false);
+function ThemeMoodboard({ bgColors, palette }: { bgColors: string[]; palette: string[] }) {
+  return (
+    <div className="relative w-full h-48 overflow-hidden" style={{ background: bgColors[0] }}>
+      {/* Angled color block 1 */}
+      <div
+        className="absolute -right-4 top-0 w-32 h-full"
+        style={{ background: bgColors[1], transform: "skewX(-8deg)" }}
+      />
+      {/* Angled color block 2 */}
+      <div
+        className="absolute -right-8 bottom-0 w-20 h-24"
+        style={{ background: bgColors[2], transform: "skewX(4deg)" }}
+      />
+      {/* Mini invitation mockup */}
+      <div
+        className="absolute left-4 top-4 w-24 h-32 bg-white shadow-lg flex flex-col items-center justify-center"
+        style={{ transform: "rotate(-3deg)" }}
+      >
+        <div className="w-16 h-px bg-[#C4A55A] mb-2" />
+        <div className="w-12 h-px bg-[#2C2C2C]/10 mb-1.5" />
+        <div className="w-10 h-px bg-[#2C2C2C]/10 mb-1.5" />
+        <div className="w-12 h-px bg-[#2C2C2C]/10 mb-2" />
+        <p
+          className="text-[7px] tracking-wider uppercase text-center text-[#2C2C2C]/50"
+          style={{ fontFamily: "var(--font-ui)" }}
+        >
+          BABY
+          <br />
+          SHOWER
+        </p>
+        <div className="w-16 h-px bg-[#C4A55A] mt-2" />
+      </div>
+      {/* Color palette strip */}
+      <div className="absolute bottom-3 left-4 flex gap-1">
+        {palette.map((c) => (
+          <div
+            key={c}
+            className="w-4 h-4 rounded-full border border-white/50 shadow-sm"
+            style={{ background: c }}
+          />
+        ))}
+      </div>
+      {/* Abstract organic shapes */}
+      <div
+        className="absolute right-6 top-6 w-16 h-16 rounded-full opacity-20"
+        style={{ background: bgColors[3] }}
+      />
+      <div
+        className="absolute right-10 top-10 w-8 h-8 rounded-full opacity-30"
+        style={{ background: bgColors[0] }}
+      />
+    </div>
+  );
+}
 
+function ThemeCard({
+  theme,
+  index,
+}: {
+  theme: (typeof themes)[0];
+  index: number;
+}) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.6, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -4, scale: 1.02 }}
-      className="group relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer"
-      style={{ aspectRatio: "3/4" }}
+      transition={{ duration: 0.6, delay: index * 0.07, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="group bg-white border border-[#E8E0D8] hover:border-[#C4A55A]/40 hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col"
     >
-      {/* Background gradient */}
-      <div className="absolute inset-0" style={{ background: theme.gradient }} />
+      {/* Moodboard collage */}
+      <ThemeMoodboard bgColors={theme.bgColors} palette={theme.palette} />
 
-      {/* Emoji collage */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-        <div className="text-5xl sm:text-6xl group-hover:scale-110 transition-transform duration-500">
-          {theme.emojis[0]}
-        </div>
-        <div className="flex gap-3 text-3xl sm:text-4xl">
-          <span>{theme.emojis[1]}</span>
-          <span>{theme.emojis[2]}</span>
-        </div>
-      </div>
-
-      {/* Trending badge */}
-      {theme.trending && (
-        <div className="absolute top-3 left-3">
-          <span className="bg-white/90 backdrop-blur-sm text-blush-600 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-            🔥 Trending
+      {/* Theme info */}
+      <div className="p-5 flex flex-col flex-1">
+        <div className="flex items-start justify-between mb-2">
+          <h3
+            className="text-lg text-[#2C2C2C] leading-snug"
+            style={{ fontFamily: "var(--font-heading)", fontWeight: 500 }}
+          >
+            {theme.name}
+          </h3>
+          <span
+            className="text-[9px] tracking-[0.15em] uppercase text-[#2C2C2C]/40 mt-1 ml-2 flex-shrink-0"
+            style={{ fontFamily: "var(--font-ui)" }}
+          >
+            {theme.category}
           </span>
         </div>
-      )}
 
-      {/* Save button */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          setSaved(!saved);
-        }}
-        className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm shadow-sm hover:scale-110 transition-all duration-200"
-        aria-label="Save theme"
-      >
-        <span className={`text-base transition-transform duration-200 ${saved ? "scale-125" : ""}`}>
-          {saved ? "❤️" : "🤍"}
-        </span>
-      </button>
+        <p
+          className="text-sm text-[#2C2C2C]/55 leading-relaxed mb-4 flex-1"
+          style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+        >
+          {theme.description}
+        </p>
 
-      {/* Bottom overlay */}
-      <div
-        className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 group-hover:translate-y-0 transition-transform duration-300"
-        style={{
-          background: "linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%)",
-        }}
-      >
-        <div className="flex items-end justify-between">
-          <div>
-            <h3
-              className="text-white font-bold text-base leading-tight"
-              style={{ fontFamily: "var(--font-playfair), serif" }}
-            >
-              {theme.name}
-            </h3>
-            <p className="text-white/70 text-xs mt-0.5">{theme.saves} saves</p>
-          </div>
-          <button className="px-3 py-1.5 bg-white text-gray-800 text-xs font-bold rounded-xl hover:bg-blush-50 transition-colors duration-200 opacity-0 group-hover:opacity-100 transition-opacity">
-            View →
-          </button>
+        {/* Palette dots */}
+        <div className="flex gap-1.5 mb-4">
+          {theme.palette.map((c) => (
+            <div
+              key={c}
+              className="w-4 h-4 rounded-full border border-[#E8E0D8]"
+              style={{ background: c }}
+            />
+          ))}
         </div>
+
+        <Link
+          href={`/themes/${theme.name.toLowerCase().replace(/\s+/g, "-")}`}
+          className="inline-flex items-center gap-2 text-[11px] tracking-[0.1em] uppercase text-[#2C2C2C]/50 hover:text-[#2C2C2C] transition-colors group-hover:gap-3 duration-300"
+          style={{ fontFamily: "var(--font-ui)" }}
+        >
+          Explore Theme
+          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </Link>
       </div>
     </motion.div>
   );
@@ -174,69 +210,65 @@ export default function PopularThemes() {
       : themes.filter((t) => t.category === activeFilter);
 
   return (
-    <section id="themes" className="py-20 md:py-28" style={{ background: "linear-gradient(180deg, #fdf4f7 0%, #fefdf8 100%)" }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="themes"
+      className="py-24 md:py-32"
+      style={{ background: "#FAF8F5" }}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-12">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-xs font-bold uppercase tracking-widest text-sage-500 mb-3"
-          >
-            Inspiration
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight"
-            style={{ fontFamily: "var(--font-playfair), serif" }}
-          >
-            Trending Baby Shower
-            <br />
-            <span
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div className="max-w-lg">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-3 mb-6"
+            >
+              <div className="w-8 h-px bg-[#C4A55A]" />
+              <span
+                className="text-[10px] tracking-[0.25em] uppercase text-[#C4A55A]"
+                style={{ fontFamily: "var(--font-ui)" }}
+              >
+                Inspiration
+              </span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-[#2C2C2C] leading-tight"
               style={{
-                background: "linear-gradient(135deg, #5d845d, #3b543b)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
+                fontFamily: "var(--font-display)",
+                fontWeight: 300,
+                fontSize: "clamp(2rem, 4vw, 3rem)",
               }}
             >
-              Themes
-            </span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto mb-8"
-            style={{ fontFamily: "var(--font-nunito), sans-serif" }}
-          >
-            Discover beautiful, curated themes loved by thousands of mamas around the world.
-          </motion.p>
+              Curated Theme Collections
+            </motion.h2>
+          </div>
 
           {/* Filter tabs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-2"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-wrap gap-0"
           >
             {filters.map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                className={`px-4 py-2 text-[11px] tracking-[0.1em] uppercase transition-all duration-200 border-b-2 ${
                   activeFilter === filter
-                    ? "bg-blush-500 text-white shadow-md shadow-blush-200"
-                    : "bg-white text-gray-600 hover:bg-blush-50 hover:text-blush-600 border border-gray-200"
+                    ? "text-[#2C2C2C] border-[#2C2C2C]"
+                    : "text-[#2C2C2C]/40 border-transparent hover:text-[#2C2C2C]/70"
                 }`}
-                style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+                style={{ fontFamily: "var(--font-ui)" }}
               >
                 {filter}
               </button>
@@ -252,7 +284,7 @@ export default function PopularThemes() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-6"
+            className="grid grid-cols-2 sm:grid-cols-3 gap-6"
           >
             {filtered.map((theme, index) => (
               <ThemeCard key={theme.name} theme={theme} index={index} />
@@ -266,16 +298,16 @@ export default function PopularThemes() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mt-14"
+          className="mt-14 flex items-center gap-4"
         >
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-cream-50 text-gray-700 font-bold text-base rounded-2xl border-2 border-gray-200 hover:border-blush-200 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-            style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+          <div className="w-8 h-px bg-[#E8E0D8]" />
+          <Link
+            href="/themes"
+            className="text-[11px] tracking-[0.15em] uppercase text-[#2C2C2C]/50 hover:text-[#2C2C2C] transition-colors"
+            style={{ fontFamily: "var(--font-ui)" }}
           >
             Browse All 500+ Themes
-            <span>→</span>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

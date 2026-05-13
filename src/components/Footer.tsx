@@ -1,25 +1,23 @@
 "use client";
-
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 const links = {
   Tools: [
     "Invitation Maker",
     "Game Generator",
-    "Theme Finder Quiz",
+    "Theme Finder",
     "Printable Checklist",
     "RSVP Website",
     "Bingo Generator",
   ],
   Themes: [
-    "Teddy Bear",
-    "Safari Adventure",
-    "Boho Floral",
-    "Garden Party",
+    "Garden Botanica",
+    "Safari Serenity",
+    "Boho Desert",
     "Neutral Luxe",
-    "Moon & Stars",
+    "Midnight Garden",
+    "Pink Peonies",
   ],
   Printables: [
     "Invitations",
@@ -41,7 +39,7 @@ const links = {
 
 function PinterestIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" />
     </svg>
   );
@@ -49,7 +47,7 @@ function PinterestIcon() {
 
 function InstagramIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
     </svg>
   );
@@ -57,7 +55,7 @@ function InstagramIcon() {
 
 function TikTokIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
       <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.17 8.17 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z" />
     </svg>
   );
@@ -76,33 +74,40 @@ export default function Footer() {
   };
 
   return (
-    <footer
-      style={{
-        background: "linear-gradient(160deg, #fdf4f7 0%, #fce8f1 30%, #fefdf8 70%, #fdf9ec 100%)",
-      }}
-    >
+    <footer style={{ background: "#FAF8F5" }}>
       {/* Newsletter bar */}
-      <div className="border-b border-blush-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
+      <div className="border-t border-b border-[#E8E0D8]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+            <div className="max-w-sm">
               <h3
-                className="text-2xl md:text-3xl font-bold text-gray-800 mb-1"
-                style={{ fontFamily: "var(--font-playfair), serif" }}
+                className="text-[#2C2C2C] mb-2 leading-tight"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontWeight: 300,
+                  fontSize: "1.6rem",
+                }}
               >
-                Get Free Printables & Planning Tips 🎀
+                Inspiration &amp; Printables, Delivered
               </h3>
               <p
-                className="text-gray-500 text-sm"
-                style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+                className="text-sm text-[#2C2C2C]/50 leading-relaxed"
+                style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
               >
-                Join 50,000+ mamas — we send weekly inspiration, free printables, and no spam ever.
+                Weekly curation of themes, free printables, and planning ideas. No noise, ever.
               </p>
             </div>
-            <form onSubmit={handleSubscribe} className="flex gap-2 w-full md:w-auto">
+
+            <form onSubmit={handleSubscribe} className="flex gap-0 w-full md:w-auto">
               {subscribed ? (
-                <div className="flex items-center gap-2 px-6 py-3 bg-sage-100 text-sage-700 rounded-2xl font-semibold text-sm">
-                  <span>✅</span> You&apos;re subscribed!
+                <div
+                  className="flex items-center gap-3 px-6 py-3 border border-[#9BAD9B] text-[#6B8A6B] text-sm"
+                  style={{ fontFamily: "var(--font-ui)" }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M2 7l3 3 7-7" stroke="#6B8A6B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  You&apos;re subscribed
                 </div>
               ) : (
                 <>
@@ -112,15 +117,15 @@ export default function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
                     required
-                    className="flex-1 md:w-64 px-4 py-3 rounded-2xl border border-blush-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blush-300 placeholder-gray-400"
-                    style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+                    className="flex-1 md:w-56 px-4 py-3 border border-[#E8E0D8] bg-white text-sm text-[#2C2C2C] placeholder-[#2C2C2C]/30 focus:outline-none focus:border-[#C4A55A] transition-colors"
+                    style={{ fontFamily: "var(--font-body)" }}
                   />
                   <button
                     type="submit"
-                    className="px-6 py-3 bg-blush-500 hover:bg-blush-600 text-white font-bold text-sm rounded-2xl shadow-md shadow-blush-200 transition-all duration-200 hover:scale-105 whitespace-nowrap"
-                    style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+                    className="px-6 py-3 bg-[#2C2C2C] text-white text-[11px] tracking-[0.12em] uppercase hover:bg-[#3D2B1F] transition-colors duration-300 whitespace-nowrap"
+                    style={{ fontFamily: "var(--font-ui)" }}
                   >
-                    Subscribe Free
+                    Subscribe
                   </button>
                 </>
               )}
@@ -130,48 +135,46 @@ export default function Footer() {
       </div>
 
       {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Logo + tagline col */}
           <div className="lg:col-span-1">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group mb-4 w-fit">
-              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
-                <ellipse cx="10" cy="16" rx="8" ry="5" fill="#f4a8c7" opacity="0.9" />
-                <ellipse cx="22" cy="16" rx="8" ry="5" fill="#ec72a4" opacity="0.9" />
-                <circle cx="16" cy="16" r="4" fill="#e04880" />
-                <circle cx="16" cy="16" r="2" fill="#cd2d62" />
-              </svg>
-              <div>
+            <Link href="/" className="flex items-center gap-3 mb-5 w-fit">
+              <div className="w-7 h-7 rounded-full border border-[#C4A55A] flex items-center justify-center flex-shrink-0">
                 <span
-                  className="block text-blush-700 font-bold text-sm leading-tight"
-                  style={{ fontFamily: "var(--font-playfair), serif" }}
+                  className="text-[9px] tracking-widest text-[#C4A55A] font-light"
+                  style={{ fontFamily: "var(--font-ui)" }}
                 >
-                  Plan My Baby Shower
+                  PBS
                 </span>
               </div>
+              <span
+                className="text-sm text-[#2C2C2C] font-light"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Plan My Baby Shower
+              </span>
             </Link>
 
             <p
-              className="text-sm text-gray-500 leading-relaxed mb-5"
-              style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+              className="text-sm text-[#2C2C2C]/45 leading-relaxed mb-6 italic"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 400 }}
             >
-              Creating magical baby shower memories, one mama at a time. 🌸
+              Creating extraordinary celebrations, one detail at a time.
             </p>
 
             {/* Social icons */}
             <div className="flex gap-3">
               {[
-                { icon: <PinterestIcon />, label: "Pinterest", color: "#e60023" },
-                { icon: <InstagramIcon />, label: "Instagram", color: "#e04880" },
-                { icon: <TikTokIcon />, label: "TikTok", color: "#374151" },
+                { icon: <PinterestIcon />, label: "Pinterest" },
+                { icon: <InstagramIcon />, label: "Instagram" },
+                { icon: <TikTokIcon />, label: "TikTok" },
               ].map((social) => (
                 <a
                   key={social.label}
                   href="#"
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-white shadow-sm border border-blush-100 flex items-center justify-center hover:scale-110 hover:shadow-md transition-all duration-200"
-                  style={{ color: social.color }}
+                  className="w-8 h-8 border border-[#E8E0D8] flex items-center justify-center text-[#2C2C2C]/40 hover:text-[#2C2C2C] hover:border-[#2C2C2C] transition-all duration-200"
                 >
                   {social.icon}
                 </a>
@@ -183,18 +186,18 @@ export default function Footer() {
           {Object.entries(links).map(([category, items]) => (
             <div key={category}>
               <h4
-                className="text-xs font-bold uppercase tracking-widest text-blush-600 mb-4"
-                style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+                className="text-[10px] tracking-[0.2em] uppercase text-[#2C2C2C]/40 mb-5"
+                style={{ fontFamily: "var(--font-ui)" }}
               >
                 {category}
               </h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-3">
                 {items.map((item) => (
                   <li key={item}>
                     <Link
                       href="#"
-                      className="text-sm text-gray-500 hover:text-blush-600 transition-colors duration-150 font-medium"
-                      style={{ fontFamily: "var(--font-nunito), sans-serif" }}
+                      className="text-sm text-[#2C2C2C]/60 hover:text-[#2C2C2C] transition-colors duration-150"
+                      style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
                     >
                       {item}
                     </Link>
@@ -207,16 +210,26 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-blush-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
-            <p style={{ fontFamily: "var(--font-nunito), sans-serif" }}>
-              © 2026 Plan My Baby Shower. Made with 💕 for mamas everywhere.
+      <div className="border-t border-[#E8E0D8]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p
+              className="text-[11px] text-[#2C2C2C]/35"
+              style={{ fontFamily: "var(--font-ui)" }}
+            >
+              &copy; 2026 Plan My Baby Shower. All rights reserved.
             </p>
-            <div className="flex items-center gap-4">
-              <Link href="#" className="hover:text-blush-500 transition-colors">Privacy</Link>
-              <Link href="#" className="hover:text-blush-500 transition-colors">Terms</Link>
-              <Link href="#" className="hover:text-blush-500 transition-colors">Contact</Link>
+            <div className="flex items-center gap-6">
+              {["Privacy", "Terms", "Contact"].map((item) => (
+                <Link
+                  key={item}
+                  href="#"
+                  className="text-[11px] text-[#2C2C2C]/35 hover:text-[#2C2C2C] transition-colors"
+                  style={{ fontFamily: "var(--font-ui)" }}
+                >
+                  {item}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
