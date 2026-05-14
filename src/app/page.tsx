@@ -1,8 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import FeaturedTools from "@/components/FeaturedTools";
-import PopularThemes from "@/components/PopularThemes";
-import PrintablesGallery from "@/components/PrintablesGallery";
+import TrendingNow from "@/components/TrendingNow";
+import FeaturedThemes from "@/components/FeaturedThemes";
+import MostSavedInvitations from "@/components/MostSavedInvitations";
+import PlanningTools from "@/components/PlanningTools";
+import GamesSection from "@/components/GamesSection";
+import MoodboardGallery from "@/components/MoodboardGallery";
+import PrintableBundles from "@/components/PrintableBundles";
 import HowItWorks from "@/components/HowItWorks";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
@@ -13,9 +17,13 @@ export default function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
-      <FeaturedTools />
-      <PopularThemes />
-      <PrintablesGallery />
+      <TrendingNow />
+      <FeaturedThemes />
+      <MostSavedInvitations />
+      <PlanningTools />
+      <GamesSection />
+      <MoodboardGallery />
+      <PrintableBundles />
       <HowItWorks />
       <Testimonials />
       <Footer />
