@@ -1,41 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-
-const links = {
-  Tools: [
-    "Invitation Maker",
-    "Game Generator",
-    "Theme Finder",
-    "Printable Checklist",
-    "RSVP Website",
-    "Bingo Generator",
-  ],
-  Themes: [
-    "Garden Botanica",
-    "Safari Serenity",
-    "Boho Desert",
-    "Neutral Luxe",
-    "Midnight Garden",
-    "Pink Peonies",
-  ],
-  Printables: [
-    "Invitations",
-    "Game Cards",
-    "Signs & Banners",
-    "Bundle Packs",
-    "Checklists",
-    "Thank You Cards",
-  ],
-  Company: [
-    "About Us",
-    "Blog",
-    "Press",
-    "Careers",
-    "Privacy Policy",
-    "Terms of Service",
-  ],
-};
+import Flower from "@/components/ui/Flower";
+import Bow from "@/components/ui/Bow";
 
 function PinterestIcon() {
   return (
@@ -61,6 +28,13 @@ function TikTokIcon() {
   );
 }
 
+const links = {
+  Themes: ["Garden Botanica", "Safari Golden Hour", "Boho Desert", "Neutral Luxe", "Midnight Florals", "Pink Bow Dream"],
+  Tools: ["Invitation Maker", "Game Generator", "Theme Finder", "Printable Checklist", "RSVP Website", "Bingo Generator"],
+  Printables: ["Invitations", "Game Cards", "Signs & Banners", "Bundle Packs", "Checklists", "Thank You Cards"],
+  Company: ["About Us", "Blog", "Press", "Careers", "Privacy Policy", "Terms of Service"],
+};
+
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
@@ -74,25 +48,43 @@ export default function Footer() {
   };
 
   return (
-    <footer style={{ background: "#FAF8F5" }}>
-      {/* Newsletter bar */}
-      <div className="border-t border-b border-[#E8E0D8]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+    <footer style={{ background: "#1A1502" }} className="relative overflow-hidden">
+      {/* Background flower decorations (very low opacity) */}
+      <div className="absolute top-12 left-8 opacity-[0.07] pointer-events-none">
+        <Flower color="#C4A55A" size={120} />
+      </div>
+      <div className="absolute bottom-20 right-12 opacity-[0.05] pointer-events-none">
+        <Flower color="#E8C4C4" size={100} />
+      </div>
+      <div className="absolute top-1/2 left-1/3 opacity-[0.04] pointer-events-none">
+        <Flower color="#9BAD9B" size={80} />
+      </div>
+      <div className="absolute top-8 right-1/4 opacity-[0.06] pointer-events-none">
+        <Flower color="#C4A55A" size={60} />
+      </div>
+
+      {/* Newsletter section */}
+      <div className="relative z-10 border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-14">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div className="max-w-sm">
-              <h3
-                className="text-[#2C2C2C] mb-2 leading-tight"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 300,
-                  fontSize: "1.6rem",
-                }}
-              >
-                Inspiration &amp; Printables, Delivered
-              </h3>
+              <div className="flex items-center gap-2 mb-3">
+                <Bow color="#C4A55A" size={28} />
+                <h3
+                  className="leading-tight"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontWeight: 300,
+                    fontSize: "1.6rem",
+                    color: "#FAF8F2",
+                  }}
+                >
+                  Inspiration, Delivered
+                </h3>
+              </div>
               <p
-                className="text-sm text-[#2C2C2C]/50 leading-relaxed"
-                style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+                className="text-sm leading-relaxed"
+                style={{ fontFamily: "var(--font-body)", fontWeight: 300, color: "rgba(255,255,255,0.45)" }}
               >
                 Weekly curation of themes, free printables, and planning ideas. No noise, ever.
               </p>
@@ -101,13 +93,13 @@ export default function Footer() {
             <form onSubmit={handleSubscribe} className="flex gap-0 w-full md:w-auto">
               {subscribed ? (
                 <div
-                  className="flex items-center gap-3 px-6 py-3 border border-[#9BAD9B] text-[#6B8A6B] text-sm"
-                  style={{ fontFamily: "var(--font-ui)" }}
+                  className="flex items-center gap-3 px-6 py-3 text-sm"
+                  style={{ color: "#9BAD9B", fontFamily: "var(--font-ui)", border: "1px solid rgba(155,173,155,0.3)", borderRadius: 8 }}
                 >
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M2 7l3 3 7-7" stroke="#6B8A6B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M2 7l3 3 7-7" stroke="#9BAD9B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  You&apos;re subscribed
+                  You&apos;re subscribed!
                 </div>
               ) : (
                 <>
@@ -117,13 +109,24 @@ export default function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
                     required
-                    className="flex-1 md:w-56 px-4 py-3 border border-[#E8E0D8] bg-white text-sm text-[#2C2C2C] placeholder-[#2C2C2C]/30 focus:outline-none focus:border-[#C4A55A] transition-colors"
-                    style={{ fontFamily: "var(--font-body)" }}
+                    className="flex-1 md:w-56 px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none transition-colors"
+                    style={{
+                      background: "rgba(255,255,255,0.07)",
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      borderRight: "none",
+                      borderRadius: "8px 0 0 8px",
+                      fontFamily: "var(--font-body)",
+                    }}
                   />
                   <button
                     type="submit"
-                    className="px-6 py-3 bg-[#2C2C2C] text-white text-[11px] tracking-[0.12em] uppercase hover:bg-[#3D2B1F] transition-colors duration-300 whitespace-nowrap"
-                    style={{ fontFamily: "var(--font-ui)" }}
+                    className="px-6 py-3 text-[11px] tracking-[0.12em] uppercase whitespace-nowrap transition-all hover:brightness-110"
+                    style={{
+                      background: "linear-gradient(135deg, #C9927A, #B5785F)",
+                      color: "white",
+                      borderRadius: "0 8px 8px 0",
+                      fontFamily: "var(--font-ui)",
+                    }}
                   >
                     Subscribe
                   </button>
@@ -134,37 +137,36 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Main footer */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+      {/* Main footer body */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-          {/* Logo + tagline col */}
+          {/* Logo + tagline */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-5 w-fit">
-              <div className="w-7 h-7 rounded-full border border-[#C4A55A] flex items-center justify-center flex-shrink-0">
-                <span
-                  className="text-[9px] tracking-widest text-[#C4A55A] font-light"
-                  style={{ fontFamily: "var(--font-ui)" }}
-                >
-                  PBS
-                </span>
+            <Link href="/" className="flex items-center gap-2 mb-5 w-fit group">
+              <div className="w-8 h-8 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors group-hover:border-[#C4A55A]" style={{ borderColor: "rgba(196,165,90,0.4)" }}>
+                <span className="text-[9px] tracking-widest font-light" style={{ color: "#C4A55A", fontFamily: "var(--font-ui)" }}>PBS</span>
               </div>
               <span
-                className="text-sm text-[#2C2C2C] font-light"
-                style={{ fontFamily: "var(--font-display)" }}
+                className="font-light"
+                style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", color: "#FAF8F2" }}
               >
                 Plan My Baby Shower
               </span>
             </Link>
 
+            <div className="mb-4 opacity-50">
+              <Bow color="#E8C4C4" size={32} />
+            </div>
+
             <p
-              className="text-sm text-[#2C2C2C]/45 leading-relaxed mb-6 italic"
-              style={{ fontFamily: "var(--font-display)", fontWeight: 400 }}
+              className="text-sm leading-relaxed mb-6 italic"
+              style={{ fontFamily: "var(--font-display)", fontWeight: 400, color: "rgba(255,255,255,0.35)" }}
             >
               Creating extraordinary celebrations, one detail at a time.
             </p>
 
             {/* Social icons */}
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               {[
                 { icon: <PinterestIcon />, label: "Pinterest" },
                 { icon: <InstagramIcon />, label: "Instagram" },
@@ -174,7 +176,20 @@ export default function Footer() {
                   key={social.label}
                   href="#"
                   aria-label={social.label}
-                  className="w-8 h-8 border border-[#E8E0D8] flex items-center justify-center text-[#2C2C2C]/40 hover:text-[#2C2C2C] hover:border-[#2C2C2C] transition-all duration-200"
+                  className="w-8 h-8 flex items-center justify-center transition-all duration-200 rounded-full"
+                  style={{
+                    background: "rgba(255,255,255,0.06)",
+                    color: "rgba(255,255,255,0.35)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.color = "#C4A55A";
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(196,165,90,0.4)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.35)";
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.08)";
+                  }}
                 >
                   {social.icon}
                 </a>
@@ -185,19 +200,24 @@ export default function Footer() {
           {/* Link columns */}
           {Object.entries(links).map(([category, items]) => (
             <div key={category}>
-              <h4
-                className="text-[10px] tracking-[0.2em] uppercase text-[#2C2C2C]/40 mb-5"
-                style={{ fontFamily: "var(--font-ui)" }}
-              >
-                {category}
-              </h4>
-              <ul className="space-y-3">
+              <div className="flex items-center gap-2 mb-5">
+                <Flower color="rgba(196,165,90,0.5)" size={10} />
+                <h4
+                  className="text-[10px] tracking-[0.2em] uppercase"
+                  style={{ fontFamily: "var(--font-ui)", color: "rgba(255,255,255,0.35)" }}
+                >
+                  {category}
+                </h4>
+              </div>
+              <ul className="space-y-2.5">
                 {items.map((item) => (
                   <li key={item}>
                     <Link
                       href="#"
-                      className="text-sm text-[#2C2C2C]/60 hover:text-[#2C2C2C] transition-colors duration-150"
-                      style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+                      className="text-sm transition-colors duration-150"
+                      style={{ fontFamily: "var(--font-body)", fontWeight: 300, color: "rgba(255,255,255,0.45)" }}
+                      onMouseEnter={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#FAF8F2"}
+                      onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.45)"}
                     >
                       {item}
                     </Link>
@@ -210,22 +230,24 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-[#E8E0D8]">
+      <div className="relative z-10 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p
-              className="text-[11px] text-[#2C2C2C]/35"
-              style={{ fontFamily: "var(--font-ui)" }}
-            >
-              &copy; 2026 Plan My Baby Shower. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              <Flower color="rgba(196,165,90,0.3)" size={10} />
+              <p className="text-[11px]" style={{ fontFamily: "var(--font-ui)", color: "rgba(255,255,255,0.25)" }}>
+                &copy; 2026 Plan My Baby Shower. All rights reserved.
+              </p>
+            </div>
+            <div className="flex items-center gap-5">
               {["Privacy", "Terms", "Contact"].map((item) => (
                 <Link
                   key={item}
                   href="#"
-                  className="text-[11px] text-[#2C2C2C]/35 hover:text-[#2C2C2C] transition-colors"
-                  style={{ fontFamily: "var(--font-ui)" }}
+                  className="text-[11px] transition-colors"
+                  style={{ fontFamily: "var(--font-ui)", color: "rgba(255,255,255,0.25)" }}
+                  onMouseEnter={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.6)"}
+                  onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.25)"}
                 >
                   {item}
                 </Link>

@@ -34,24 +34,67 @@ body {
   --color-border: #E8E0D8;
 }
 
-/* Keyframes */
+/* Scrapbook textures */
+.texture-linen {
+  background-image:
+    repeating-linear-gradient(
+      0deg, transparent, transparent 2px, rgba(0,0,0,0.015) 2px, rgba(0,0,0,0.015) 4px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 2px, rgba(0,0,0,0.01) 2px, rgba(0,0,0,0.01) 4px
+    );
+}
+
+.texture-paper {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* Animation keyframes */
+@keyframes sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes drift {
+  0% { transform: translateX(0) translateY(0) rotate(0deg); }
+  33% { transform: translateX(4px) translateY(-6px) rotate(1deg); }
+  66% { transform: translateX(-3px) translateY(-3px) rotate(-1deg); }
+  100% { transform: translateX(0) translateY(0) rotate(0deg); }
+}
+
 @keyframes float-slow {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-12px) rotate(1deg); }
 }
+
 @keyframes float-medium {
   0%, 100% { transform: translateY(0px) rotate(-1deg); }
   50% { transform: translateY(-8px) rotate(1deg); }
 }
+
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 }
 
+@keyframes confetti-fall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(60px) rotate(360deg); opacity: 0; }
+}
+
+.animate-sway { animation: sway 4s ease-in-out infinite; }
+.animate-bob { animation: bob 3s ease-in-out infinite; }
+.animate-drift { animation: drift 7s ease-in-out infinite; }
 .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
 .animate-float-medium { animation: float-medium 4.5s ease-in-out infinite; }
 .animate-fade-up { animation: fade-up 0.7s ease forwards; }
