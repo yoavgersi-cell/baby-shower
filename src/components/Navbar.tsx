@@ -2,10 +2,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Flower from "@/components/ui/Flower";
+import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { count, setIsOpen } = useCart();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -42,22 +44,65 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-8">
+            <Link
+              href="/shop"
+              className="text-[11px] tracking-[0.12em] uppercase transition-colors font-semibold"
+              style={{ fontFamily: "var(--font-ui)", color: "#C9927A" }}
+            >
+              Shop
+            </Link>
             {["Themes", "Tools", "Printables", "Games", "Blog"].map((item) => (
               <Link
                 key={item}
                 href={`/${item.toLowerCase()}`}
                 className="text-[11px] tracking-[0.12em] uppercase transition-colors"
                 style={{ fontFamily: "var(--font-ui)", color: "#2C2C2C" }}
-                onMouseEnter={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#C9927A"}
-                onMouseLeave={(e) => (e.currentTarget as HTMLAnchorElement).style.color = "#2C2C2C"}
+                onMouseEnter={(e) =>
+                  ((e.currentTarget as HTMLAnchorElement).style.color =
+                    "#C9927A")
+                }
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLAnchorElement).style.color =
+                    "#2C2C2C")
+                }
               >
                 {item}
               </Link>
             ))}
           </div>
 
-          {/* Desktop CTA */}
+          {/* Desktop CTA + Cart */}
           <div className="hidden lg:flex items-center gap-3">
+            {/* Cart icon */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="relative p-2 hover:bg-[#F5F0E8] rounded-full transition-colors"
+              aria-label="Open cart"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#2C2C2C"
+                strokeWidth="1.5"
+              >
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 01-8 0" />
+              </svg>
+              {count > 0 && (
+                <span
+                  className="absolute -top-1 -right-1 w-4 h-4 rounded-full text-[9px] text-white flex items-center justify-center font-bold"
+                  style={{
+                    background: "#C9927A",
+                    fontFamily: "var(--font-ui)",
+                  }}
+                >
+                  {count}
+                </span>
+              )}
+            </button>
             <Link
               href="/start"
               className="inline-flex items-center gap-2 text-[11px] tracking-wide font-medium px-5 py-2.5 text-white rounded-full transition-all hover:-translate-y-0.5 hover:shadow-md"
@@ -70,27 +115,64 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden p-2"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-          >
-            <div className="flex flex-col gap-1.5">
-              <span
-                className={`block w-5 h-px transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-[7px]" : ""}`}
-                style={{ background: "#2C2C2C" }}
-              />
-              <span
-                className={`block w-5 h-px transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`}
-                style={{ background: "#2C2C2C" }}
-              />
-              <span
-                className={`block w-5 h-px transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""}`}
-                style={{ background: "#2C2C2C" }}
-              />
-            </div>
-          </button>
+          {/* Mobile: cart + hamburger */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="relative p-2 hover:bg-[#F5F0E8] rounded-full transition-colors"
+              aria-label="Open cart"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#2C2C2C"
+                strokeWidth="1.5"
+              >
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 01-8 0" />
+              </svg>
+              {count > 0 && (
+                <span
+                  className="absolute -top-1 -right-1 w-4 h-4 rounded-full text-[9px] text-white flex items-center justify-center font-bold"
+                  style={{
+                    background: "#C9927A",
+                    fontFamily: "var(--font-ui)",
+                  }}
+                >
+                  {count}
+                </span>
+              )}
+            </button>
+            <button
+              className="p-2"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              <div className="flex flex-col gap-1.5">
+                <span
+                  className={`block w-5 h-px transition-all duration-300 ${
+                    mobileOpen ? "rotate-45 translate-y-[7px]" : ""
+                  }`}
+                  style={{ background: "#2C2C2C" }}
+                />
+                <span
+                  className={`block w-5 h-px transition-all duration-300 ${
+                    mobileOpen ? "opacity-0" : ""
+                  }`}
+                  style={{ background: "#2C2C2C" }}
+                />
+                <span
+                  className={`block w-5 h-px transition-all duration-300 ${
+                    mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""
+                  }`}
+                  style={{ background: "#2C2C2C" }}
+                />
+              </div>
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
@@ -99,6 +181,14 @@ export default function Navbar() {
             className="lg:hidden py-6 space-y-4"
             style={{ background: "white", borderTop: "1px solid #EDE5DC" }}
           >
+            <Link
+              href="/shop"
+              className="block px-4 text-sm tracking-widest uppercase font-semibold text-[#C9927A]"
+              style={{ fontFamily: "var(--font-ui)" }}
+              onClick={() => setMobileOpen(false)}
+            >
+              Shop Templates
+            </Link>
             {["Themes", "Tools", "Printables", "Games", "Blog"].map((item) => (
               <Link
                 key={item}

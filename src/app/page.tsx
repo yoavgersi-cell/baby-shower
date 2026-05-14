@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import ShopTeaser from "@/components/ShopTeaser";
 import TrendingNow from "@/components/TrendingNow";
 import FeaturedThemes from "@/components/FeaturedThemes";
 import MostSavedInvitations from "@/components/MostSavedInvitations";
@@ -17,6 +18,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
+      <ShopTeaser />
       <TrendingNow />
       <FeaturedThemes />
       <MostSavedInvitations />
