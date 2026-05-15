@@ -102,14 +102,14 @@ export default function Hero() {
               className="flex flex-wrap gap-3 mb-10"
             >
               <Link
-                href="/shop"
+                href="/freebies"
                 className="inline-flex items-center gap-2 px-8 py-4 text-white text-sm font-medium tracking-wide rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
                 style={{
                   background: "linear-gradient(135deg, #C9927A, #B5785F)",
                   fontFamily: "var(--font-ui)",
                 }}
               >
-                Browse Templates
+                Browse Free Templates
                 <svg
                   width="14"
                   height="14"
@@ -123,14 +123,14 @@ export default function Hero() {
                 </svg>
               </Link>
               <Link
-                href="/themes"
+                href="/shop"
                 className="inline-flex items-center gap-2 px-8 py-4 text-[#2C2C2C] text-sm font-medium tracking-wide rounded-full border-2 hover:border-[#C9927A] hover:text-[#C9927A] transition-all"
                 style={{
                   borderColor: "#E8E0D8",
                   fontFamily: "var(--font-ui)",
                 }}
               >
-                Explore Themes
+                Shop All Designs
               </Link>
             </motion.div>
 

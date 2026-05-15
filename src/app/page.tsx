@@ -1,35 +1,37 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import ShopTeaser from "@/components/ShopTeaser";
-import TrendingNow from "@/components/TrendingNow";
-import FeaturedThemes from "@/components/FeaturedThemes";
-import MostSavedInvitations from "@/components/MostSavedInvitations";
+import PopularInvitations from "@/components/PopularInvitations";
 import PlanningTools from "@/components/PlanningTools";
-import GamesSection from "@/components/GamesSection";
-import MoodboardGallery from "@/components/MoodboardGallery";
-import PrintableBundles from "@/components/PrintableBundles";
-import HowItWorks from "@/components/HowItWorks";
+import TrendingGames from "@/components/TrendingGames";
+import BlogSection from "@/components/BlogSection";
+import FreebiesSection from "@/components/FreebiesSection";
+import ThemeSpotlight from "@/components/ThemeSpotlight";
+import PlaylistSection from "@/components/PlaylistSection";
+import ShopTeaser from "@/components/ShopTeaser";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import MobileCTA from "@/components/MobileCTA";
+import CartDrawer from "@/components/CartDrawer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <>
       <Navbar />
-      <Hero />
-      <ShopTeaser />
-      <TrendingNow />
-      <FeaturedThemes />
-      <MostSavedInvitations />
-      <PlanningTools />
-      <GamesSection />
-      <MoodboardGallery />
-      <PrintableBundles />
-      <HowItWorks />
-      <Testimonials />
+      <main>
+        <Hero />
+        <PopularInvitations />
+        <PlanningTools />
+        <TrendingGames />
+        <BlogSection />
+        <FreebiesSection />
+        <ThemeSpotlight />
+        <PlaylistSection />
+        <ShopTeaser />
+        <Testimonials />
+      </main>
       <Footer />
       <MobileCTA />
-    </main>
+      <CartDrawer />
+    </>
   );
 }

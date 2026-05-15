@@ -4,13 +4,16 @@ import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { products } from "@/data/products";
 
-export default function ShopTeaser() {
+const invitations = products.filter(
+  (p) => p.category === "invitation" || p.isFeatured
+);
+
+export default function PopularInvitations() {
   const { addItem } = useCart();
-  const featured = products.filter((p) => p.isFeatured).slice(0, 4);
 
   return (
-    <section className="py-20 px-4 lg:px-8" style={{ background: "#FDFBF8" }}>
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20" style={{ background: "white" }}>
+      <div className="max-w-7xl mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
           <div>
@@ -18,7 +21,7 @@ export default function ShopTeaser() {
               className="text-[10px] tracking-[0.25em] uppercase text-[#C9927A] mb-2"
               style={{ fontFamily: "var(--font-ui)" }}
             >
-              Digital Downloads · Instant Access
+              Invitations · This Week
             </p>
             <h2
               style={{
@@ -28,50 +31,24 @@ export default function ShopTeaser() {
                 color: "#2C2C2C",
               }}
             >
-              Shop Our Templates
+              Most Saved Invitations This Week
             </h2>
-            <p
-              className="mt-2 text-[#5A4A42]/60 max-w-sm"
-              style={{ fontFamily: "var(--font-body)" }}
-            >
-              Professionally designed invitations, games & printables — ready to
-              download instantly.
-            </p>
           </div>
           <Link
-            href="/shop"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#C9927A] hover:underline flex-shrink-0"
+            href="/invitations"
+            className="text-sm font-medium text-[#C9927A] hover:underline flex-shrink-0"
             style={{ fontFamily: "var(--font-ui)" }}
           >
-            View All Templates →
+            Browse All Invitations →
           </Link>
         </div>
 
-        {/* Trust badges */}
-        <div className="flex flex-wrap gap-6 mb-10">
-          {[
-            { icon: "↓", label: "Instant Download" },
-            { icon: "✎", label: "Editable in Canva" },
-            { icon: "✓", label: "Print-Ready PDF" },
-            { icon: "♾", label: "Unlimited Prints" },
-          ].map((b) => (
-            <div
-              key={b.label}
-              className="flex items-center gap-2 text-sm text-[#2C2C2C]/60"
-              style={{ fontFamily: "var(--font-ui)" }}
-            >
-              <span className="text-[#C9927A]">{b.icon}</span>
-              {b.label}
-            </div>
-          ))}
-        </div>
-
-        {/* Product grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-          {featured.map((product) => (
+        {/* Scroll grid */}
+        <div className="flex lg:grid lg:grid-cols-4 gap-5 overflow-x-auto pb-4 lg:pb-0 snap-x snap-mandatory lg:overflow-visible">
+          {invitations.slice(0, 6).map((product) => (
             <div
               key={product.id}
-              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border"
+              className="group bg-white rounded-2xl overflow-hidden border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex-shrink-0 w-64 sm:w-72 lg:w-auto snap-start"
               style={{ borderColor: "#F0EBE4" }}
             >
               <div className="relative aspect-[3/4] overflow-hidden bg-[#FAF8F5]">
@@ -80,7 +57,7 @@ export default function ShopTeaser() {
                   alt={product.name}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 768px) 50vw, 25vw"
+                  sizes="(max-width: 1024px) 288px, 25vw"
                 />
                 {product.tag && (
                   <div
@@ -112,13 +89,10 @@ export default function ShopTeaser() {
                       fontFamily: "var(--font-ui)",
                     }}
                   >
-                    {product.isFree
-                      ? "Get Free →"
-                      : `Add to Cart — $${product.price}`}
+                    {product.isFree ? "Download Free →" : `Add to Cart — $${product.price}`}
                   </button>
                 </div>
               </div>
-
               <div className="p-4">
                 <p
                   className="text-[9px] tracking-[0.15em] uppercase text-[#C9927A]/80 mb-1"
@@ -140,10 +114,7 @@ export default function ShopTeaser() {
                         <span
                           key={i}
                           style={{
-                            color:
-                              i < Math.floor(product.rating)
-                                ? "#C4A55A"
-                                : "#E8E0D8",
+                            color: i < Math.floor(product.rating) ? "#C4A55A" : "#E8E0D8",
                             fontSize: 10,
                           }}
                         >
@@ -157,29 +128,31 @@ export default function ShopTeaser() {
                   >
                     ({product.reviews})
                   </span>
+                  <span
+                    className="text-[10px] text-[#2C2C2C]/30 ml-auto"
+                    style={{ fontFamily: "var(--font-ui)" }}
+                  >
+                    {product.downloads} downloads
+                  </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-baseline gap-1.5">
+                  <span
+                    className="text-base font-semibold"
+                    style={{
+                      fontFamily: "var(--font-ui)",
+                      color: product.isFree ? "#6A8A6A" : "#2C2C2C",
+                    }}
+                  >
+                    {product.isFree ? "Free" : `$${product.price.toFixed(2)}`}
+                  </span>
+                  {product.originalPrice && (
                     <span
-                      className="text-base font-semibold"
-                      style={{
-                        fontFamily: "var(--font-ui)",
-                        color: product.isFree ? "#6A8A6A" : "#2C2C2C",
-                      }}
+                      className="text-xs text-[#2C2C2C]/30 line-through"
+                      style={{ fontFamily: "var(--font-ui)" }}
                     >
-                      {product.isFree
-                        ? "Free"
-                        : `$${product.price.toFixed(2)}`}
+                      ${product.originalPrice.toFixed(2)}
                     </span>
-                    {product.originalPrice && (
-                      <span
-                        className="text-xs text-[#2C2C2C]/30 line-through"
-                        style={{ fontFamily: "var(--font-ui)" }}
-                      >
-                        ${product.originalPrice.toFixed(2)}
-                      </span>
-                    )}
-                  </div>
+                  )}
                   <button
                     onClick={() =>
                       addItem({
@@ -198,37 +171,12 @@ export default function ShopTeaser() {
                       color: "#2C2C2C",
                     }}
                   >
-                    {product.isFree ? "Get Free" : "Add"}
+                    {product.isFree ? "Download" : "Add"}
                   </button>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-10">
-          <Link
-            href="/shop"
-            className="inline-flex items-center gap-2 px-8 py-4 text-white text-sm font-medium tracking-wide rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
-            style={{
-              background: "linear-gradient(135deg, #C9927A, #B5785F)",
-              fontFamily: "var(--font-ui)",
-            }}
-          >
-            View All Templates
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-            >
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </Link>
         </div>
       </div>
     </section>
