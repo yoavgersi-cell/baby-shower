@@ -1,16 +1,18 @@
-import Image from "next/image";
 import Link from "next/link";
-import { freebies } from "@/data/freebies";
+import ProductCard from "@/components/ProductCard";
+import { products } from "@/data/products";
 
 export default function FreebiesSection() {
+  const freebies = products.filter((p) => p.isFree);
+
   return (
-    <section className="py-20" style={{ background: "#F5F0E8" }}>
+    <section className="py-20" style={{ background: "white" }}>
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-3 gap-4">
           <div>
             <p
-              className="text-[10px] tracking-[0.25em] uppercase text-[#C9927A] mb-2"
+              className="text-[10px] tracking-[0.25em] uppercase text-[#5A8A5A] mb-2"
               style={{ fontFamily: "var(--font-ui)" }}
             >
               Free Downloads
@@ -24,7 +26,6 @@ export default function FreebiesSection() {
               }}
             >
               Free Downloads — No Sign-Up Required
-              <span className="text-[#C9927A]">*</span>
             </h2>
           </div>
           <Link
@@ -35,98 +36,53 @@ export default function FreebiesSection() {
             See All Freebies →
           </Link>
         </div>
+
+        {/* Trust note */}
         <p
-          className="text-[11px] text-[#2C2C2C]/45 mb-10"
+          className="text-[11px] text-[#2C2C2C]/40 mb-10"
           style={{ fontFamily: "var(--font-ui)" }}
         >
-          *Some items require email for instant delivery
+          Click any card to download instantly — no email required, no catch.
         </p>
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-          {freebies.map((item) => (
-            <div
-              key={item.id}
-              className="group bg-white rounded-2xl overflow-hidden border hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-              style={{ borderColor: "#EDE5DC" }}
-            >
-              <div className="relative h-44 overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                />
-                {/* Category pill */}
-                <span
-                  className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-semibold"
-                  style={{
-                    background: "white",
-                    color: "#C9927A",
-                    fontFamily: "var(--font-ui)",
-                  }}
-                >
-                  {item.category}
-                </span>
-                {/* Email badge */}
-                {item.requiresEmail && (
-                  <span
-                    className="absolute top-3 right-3 px-2 py-1 rounded-full text-[9px] font-semibold"
-                    style={{
-                      background: "#FDF5E8",
-                      color: "#C4A55A",
-                      fontFamily: "var(--font-ui)",
-                    }}
-                  >
-                    Free w/ Email
-                  </span>
-                )}
-              </div>
-              <div className="p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <span
-                    className="px-2 py-0.5 rounded text-[9px] font-medium"
-                    style={{
-                      background: "#E8F0E8",
-                      color: "#6A8A6A",
-                      fontFamily: "var(--font-ui)",
-                    }}
-                  >
-                    {item.fileType}
-                  </span>
-                  <span
-                    className="text-[10px] text-[#2C2C2C]/40"
-                    style={{ fontFamily: "var(--font-ui)" }}
-                  >
-                    {item.downloadCount} downloads
-                  </span>
-                </div>
-                <h3
-                  className="text-sm font-medium text-[#2C2C2C] leading-tight mb-1"
-                  style={{ fontFamily: "var(--font-ui)" }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  className="text-[11px] text-[#2C2C2C]/50 leading-relaxed mb-4 line-clamp-2"
-                  style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
-                >
-                  {item.description}
-                </p>
-                <Link
-                  href="/freebies"
-                  className="block w-full py-2.5 text-center text-xs font-medium rounded-xl border transition-all hover:bg-[#C9927A] hover:text-white hover:border-[#C9927A]"
-                  style={{
-                    fontFamily: "var(--font-ui)",
-                    borderColor: "#E8E0D8",
-                    color: "#2C2C2C",
-                  }}
-                >
-                  Download Free →
-                </Link>
-              </div>
-            </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+          {freebies.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
+        </div>
+
+        {/* CTA strip */}
+        <div
+          className="mt-12 rounded-2xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6"
+          style={{
+            background: "linear-gradient(135deg,#F4F8F4,#E8F4E8)",
+            border: "1px solid #9BAD9B30",
+          }}
+        >
+          <div>
+            <p
+              className="text-lg font-medium text-[#2C2C2C] mb-1"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              Want the full planning kit?
+            </p>
+            <p
+              className="text-sm text-[#2C2C2C]/60"
+              style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+            >
+              The Complete Bundle includes everything — invitations, games, signs and more.
+            </p>
+          </div>
+          <Link
+            href="/shop/complete-baby-shower-printable-bundle"
+            className="flex-shrink-0 px-6 py-3 text-white text-sm font-semibold rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all whitespace-nowrap"
+            style={{
+              background: "linear-gradient(135deg,#C9927A,#B5785F)",
+              fontFamily: "var(--font-ui)",
+            }}
+          >
+            View Complete Bundle →
+          </Link>
         </div>
       </div>
     </section>

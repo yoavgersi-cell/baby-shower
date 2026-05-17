@@ -3,41 +3,40 @@ import { useState } from "react";
 import Link from "next/link";
 
 const footerLinks = {
-  "Plan Your Shower": [
-    { label: "Checklist Builder", href: "/printables/baby-shower-planning-checklist" },
+  "Shop By Category": [
+    { label: "Digital Invitations", href: "/category/invitations" },
+    { label: "Printable Games", href: "/category/games" },
+    { label: "Bundles", href: "/category/bundles" },
+    { label: "Signs & Decor", href: "/category/signs" },
+    { label: "All Products", href: "/shop" },
+  ],
+  "Free Downloads": [
+    { label: "Planning Checklist", href: "/shop/baby-shower-planning-checklist-printable" },
+    { label: "Baby Bingo Cards", href: "/shop/baby-shower-bingo-printable" },
+    { label: "Predictions Cards", href: "/shop/baby-predictions-cards-printable" },
     { label: "Budget Tracker", href: "/freebies" },
-    { label: "RSVP Site", href: "/rsvp" },
-    { label: "Theme Finder Quiz", href: "/themes" },
-    { label: "Guest List", href: "/tools" },
+    { label: "Guest List Template", href: "/freebies" },
   ],
-  "Invitations": [
-    { label: "Garden Floral", href: "/shop/garden-floral-invitation" },
-    { label: "Champagne & Gold", href: "/shop/champagne-gold-invitation" },
-    { label: "Teddy Bear", href: "/shop/teddy-bear-invitation" },
-    { label: "Safari", href: "/themes/safari" },
-    { label: "Boho", href: "/themes/boho-wildflower" },
-    { label: "Browse All", href: "/invitations" },
+  "Blog & Guides": [
+    { label: "25 Baby Shower Games", href: "/blog/25-baby-shower-games-people-actually-play" },
+    { label: "Teddy Bear Ideas", href: "/blog/teddy-bear-baby-shower-ideas" },
+    { label: "Safari Decor Ideas", href: "/blog/safari-baby-shower-decor-ideas" },
+    { label: "Planning Timeline", href: "/blog/baby-shower-planning-checklist-timeline" },
+    { label: "Modern Baby Showers", href: "/blog/how-to-host-modern-baby-shower" },
   ],
-  "Games & Printables": [
-    { label: "Baby Bingo", href: "/games/baby-shower-bingo" },
-    { label: "Predictions Cards", href: "/games/baby-predictions" },
-    { label: "Price Is Right", href: "/games/price-is-right-baby" },
-    { label: "Word Scramble", href: "/games/baby-word-scramble" },
-    { label: "Browse All", href: "/games" },
+  "Baby Shower Themes": [
+    { label: "Teddy Bear Theme", href: "/themes/teddy-bear" },
+    { label: "Garden Floral", href: "/themes/garden-floral" },
+    { label: "Safari Theme", href: "/themes/safari" },
+    { label: "Champagne & Bows", href: "/themes/champagne-bows" },
+    { label: "Boho Wildflower", href: "/themes/boho-wildflower" },
   ],
-  "Inspiration": [
-    { label: "Blog", href: "/blog" },
-    { label: "Themes", href: "/themes" },
-    { label: "Music Playlists", href: "/music" },
-    { label: "Pinterest", href: "#" },
-    { label: "Instagram", href: "#" },
-  ],
-  "Shop": [
-    { label: "Bundles", href: "/shop" },
-    { label: "Invitations", href: "/invitations" },
-    { label: "Games", href: "/games" },
-    { label: "Signs & Banners", href: "/printables" },
-    { label: "View All Products", href: "/shop" },
+  "About": [
+    { label: "About Us", href: "#" },
+    { label: "Contact", href: "#" },
+    { label: "FAQ", href: "#" },
+    { label: "Affiliates", href: "#" },
+    { label: "Privacy Policy", href: "#" },
   ],
 };
 
@@ -79,11 +78,8 @@ export default function Footer() {
 
   return (
     <footer style={{ background: "#1A1502" }} className="relative overflow-hidden">
-      {/* Newsletter section */}
-      <div
-        className="relative z-10 border-b"
-        style={{ borderColor: "rgba(255,255,255,0.08)" }}
-      >
+      {/* Newsletter */}
+      <div className="relative z-10 border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-14">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div className="max-w-sm">
@@ -109,7 +105,6 @@ export default function Footer() {
                 Join 50,000+ mamas. Free templates, curated themes, and no-noise planning tips weekly.
               </p>
             </div>
-
             <form onSubmit={handleSubscribe} className="flex gap-0 w-full md:w-auto">
               {subscribed ? (
                 <div
@@ -122,13 +117,7 @@ export default function Footer() {
                   }}
                 >
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path
-                      d="M2 7l3 3 7-7"
-                      stroke="#9BAD9B"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path d="M2 7l3 3 7-7" stroke="#9BAD9B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   You&apos;re subscribed!
                 </div>
@@ -176,11 +165,7 @@ export default function Footer() {
             <Link href="/" className="inline-block mb-5">
               <span
                 className="font-light"
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1.1rem",
-                  color: "#FAF8F2",
-                }}
+                style={{ fontFamily: "var(--font-display)", fontSize: "1.1rem", color: "#FAF8F2" }}
               >
                 Plan My Baby Shower
               </span>
@@ -193,7 +178,7 @@ export default function Footer() {
                 color: "rgba(255,255,255,0.35)",
               }}
             >
-              Creating extraordinary celebrations, one detail at a time.
+              Beautiful digital products for the perfect baby shower.
             </p>
             <div className="flex gap-2">
               {[
@@ -223,10 +208,7 @@ export default function Footer() {
             <div key={category}>
               <h4
                 className="text-[10px] tracking-[0.2em] uppercase mb-5"
-                style={{
-                  fontFamily: "var(--font-ui)",
-                  color: "rgba(255,255,255,0.35)",
-                }}
+                style={{ fontFamily: "var(--font-ui)", color: "rgba(255,255,255,0.35)" }}
               >
                 {category}
               </h4>
@@ -253,18 +235,12 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div
-        className="relative z-10 border-t"
-        style={{ borderColor: "rgba(255,255,255,0.06)" }}
-      >
+      <div className="relative z-10 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <p
               className="text-[11px]"
-              style={{
-                fontFamily: "var(--font-ui)",
-                color: "rgba(255,255,255,0.25)",
-              }}
+              style={{ fontFamily: "var(--font-ui)", color: "rgba(255,255,255,0.25)" }}
             >
               &copy; 2026 Plan My Baby Shower. All rights reserved.
             </p>
@@ -278,10 +254,7 @@ export default function Footer() {
                   key={item.label}
                   href={item.href}
                   className="text-[11px] transition-colors hover:text-white/60"
-                  style={{
-                    fontFamily: "var(--font-ui)",
-                    color: "rgba(255,255,255,0.25)",
-                  }}
+                  style={{ fontFamily: "var(--font-ui)", color: "rgba(255,255,255,0.25)" }}
                 >
                   {item.label}
                 </Link>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ProductCard from "@/components/ProductCard";
 import { themes } from "@/data/themes";
 import { products } from "@/data/products";
 
@@ -133,63 +134,7 @@ export default async function ThemePage({ params }: Props) {
                   </h2>
                   <div className="grid sm:grid-cols-2 gap-4">
                     {relatedProducts.map((product) => (
-                      <div
-                        key={product.id}
-                        className="group rounded-2xl overflow-hidden border hover:shadow-lg transition-all duration-300"
-                        style={{ borderColor: "#F0EBE4" }}
-                      >
-                        <div className="relative h-40 overflow-hidden">
-                          <Image
-                            src={product.image}
-                            alt={product.name}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                          />
-                          {product.tag && (
-                            <span
-                              className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-semibold"
-                              style={{
-                                background: product.tagBg,
-                                color: product.tagColor,
-                                fontFamily: "var(--font-ui)",
-                              }}
-                            >
-                              {product.tag}
-                            </span>
-                          )}
-                        </div>
-                        <div className="p-4 bg-white">
-                          <h3
-                            className="text-sm font-medium text-[#2C2C2C] mb-1"
-                            style={{ fontFamily: "var(--font-ui)" }}
-                          >
-                            {product.name}
-                          </h3>
-                          <div className="flex items-center justify-between">
-                            <span
-                              className="font-semibold"
-                              style={{
-                                fontFamily: "var(--font-ui)",
-                                color: product.isFree ? "#6A8A6A" : "#2C2C2C",
-                                fontSize: "0.9rem",
-                              }}
-                            >
-                              {product.isFree ? "Free" : `$${product.price.toFixed(2)}`}
-                            </span>
-                            <Link
-                              href="/shop"
-                              className="text-xs px-3 py-1.5 rounded-full text-white"
-                              style={{
-                                background: "linear-gradient(135deg,#C9927A,#B5785F)",
-                                fontFamily: "var(--font-ui)",
-                              }}
-                            >
-                              {product.isFree ? "Get Free" : "Get It"}
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
+                      <ProductCard key={product.id} product={product} />
                     ))}
                   </div>
                 </div>

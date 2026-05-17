@@ -1,14 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import PopularInvitations from "@/components/PopularInvitations";
-import PlanningTools from "@/components/PlanningTools";
-import TrendingGames from "@/components/TrendingGames";
-import BlogSection from "@/components/BlogSection";
+import CategoryGrid from "@/components/CategoryGrid";
+import BestSellers from "@/components/BestSellers";
 import FreebiesSection from "@/components/FreebiesSection";
-import ThemeSpotlight from "@/components/ThemeSpotlight";
-import PlaylistSection from "@/components/PlaylistSection";
-import ShopTeaser from "@/components/ShopTeaser";
-import Testimonials from "@/components/Testimonials";
+import BlogSection from "@/components/BlogSection";
+import BundlePromo from "@/components/BundlePromo";
+import PlanningGuides from "@/components/PlanningGuides";
 import Footer from "@/components/Footer";
 import MobileCTA from "@/components/MobileCTA";
 import CartDrawer from "@/components/CartDrawer";
@@ -19,15 +16,12 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <PopularInvitations />
-        <PlanningTools />
-        <TrendingGames />
-        <BlogSection />
+        <CategoryGrid />
+        <BestSellers />
         <FreebiesSection />
-        <ThemeSpotlight />
-        <PlaylistSection />
-        <ShopTeaser />
-        <Testimonials />
+        <BlogSection />
+        <BundlePromo />
+        <PlanningGuides />
       </main>
       <Footer />
       <MobileCTA />

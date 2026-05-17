@@ -1,39 +1,77 @@
 "use client";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
+import { ProductMockup } from "@/components/ui/ProductMockup";
+
+function FloatingMockup({
+  type,
+  accent,
+  bg,
+  title,
+  className,
+  delay = 0,
+  rotate = 0,
+  style,
+}: {
+  type: "invitation" | "bingo" | "bundle" | "sign" | "checklist" | "game";
+  accent: string;
+  bg: string;
+  title?: string;
+  className?: string;
+  delay?: number;
+  rotate?: number;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.7, ease: [0.34, 1.1, 0.64, 1] }}
+      className={`absolute rounded-xl overflow-hidden shadow-xl ${className ?? ""}`}
+      style={{
+        transform: `rotate(${rotate}deg)`,
+        border: "1px solid #F0EBE4",
+        ...style,
+      }}
+    >
+      <ProductMockup type={type} accentColor={accent} bgColor={bg} title={title} />
+    </motion.div>
+  );
+}
 
 export default function Hero() {
   return (
     <section
-      className="relative min-h-screen overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #FDF9F5 0%, #F8F0E8 100%)" }}
+      className="relative min-h-screen overflow-hidden flex items-center"
+      style={{
+        background: "linear-gradient(160deg,#FDF9F5 0%,#F8F0E8 60%,#FDF9F5 100%)",
+      }}
     >
-      {/* Background dot pattern */}
+      {/* Dot grid */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.025]"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, #2C2C2C 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
+          backgroundImage: "radial-gradient(circle,#2C2C2C 1px,transparent 1px)",
+          backgroundSize: "28px 28px",
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-20 min-h-screen flex items-center">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center py-16 w-full">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-16 pb-8">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-64px)]">
 
-          {/* Left: Headline */}
+          {/* Left: value prop */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9 }}
+            transition={{ duration: 0.8 }}
             className="relative z-10"
           >
+            {/* Trust badge */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 text-[10px] tracking-widest uppercase"
+              transition={{ delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6 text-[10px] font-medium"
               style={{
                 background: "white",
                 border: "1px solid #E8C4C4",
@@ -41,285 +79,178 @@ export default function Hero() {
                 fontFamily: "var(--font-ui)",
               }}
             >
-              <span style={{ color: "#C9927A" }}>✦</span> The #1 Baby Shower Platform
+              <span>⭐</span> 50,000+ downloads · Trusted by mamas worldwide
             </motion.div>
 
+            {/* Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.9 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="mb-5 leading-tight"
               style={{
                 fontFamily: "var(--font-display)",
                 fontWeight: 400,
-                lineHeight: 1.05,
                 color: "#2C2C2C",
+                fontSize: "clamp(2.2rem,5vw,4rem)",
+                lineHeight: 1.1,
               }}
             >
-              <span
-                style={{
-                  fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)",
-                  display: "block",
-                }}
-              >
-                Plan the
-              </span>
-              <span
-                style={{
-                  fontSize: "clamp(3rem, 7vw, 5.5rem)",
-                  display: "block",
-                  color: "#C9927A",
-                  fontStyle: "italic",
-                  fontWeight: 300,
-                }}
-              >
-                Perfect
-              </span>
-              <span
-                style={{
-                  fontSize: "clamp(2.5rem, 5.5vw, 4.5rem)",
-                  display: "block",
-                }}
-              >
-                Baby Shower
-              </span>
+              Baby Shower Invitations, Games & Printables —{" "}
+              <span style={{ color: "#C9927A", fontStyle: "italic" }}>Ready to Download</span>
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-5 mb-8 text-lg text-[#5A4A42]/70 leading-relaxed max-w-md"
-              style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}
+              transition={{ delay: 0.4 }}
+              className="mb-8 text-lg text-[#5A4A42]/70 leading-relaxed"
+              style={{ fontFamily: "var(--font-body)", fontWeight: 300, maxWidth: "36rem" }}
             >
-              Invitations, themes, printable games &amp; planning tools —
-              beautifully designed and ready to download.
+              Browse editable invitations, printable games, party signs, bundles, and planning
+              guides — all instant download, all beautifully designed.
             </motion.p>
 
+            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.5 }}
               className="flex flex-wrap gap-3 mb-10"
             >
               <Link
-                href="/freebies"
-                className="inline-flex items-center gap-2 px-8 py-4 text-white text-sm font-medium tracking-wide rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+                href="/shop"
+                className="inline-flex items-center gap-2 px-7 py-3.5 text-white text-sm font-semibold rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
                 style={{
-                  background: "linear-gradient(135deg, #C9927A, #B5785F)",
+                  background: "linear-gradient(135deg,#C9927A,#B5785F)",
                   fontFamily: "var(--font-ui)",
                 }}
               >
-                Browse Free Templates
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="2"
-                >
+                Shop Baby Shower Templates
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
                 </svg>
               </Link>
               <Link
-                href="/shop"
-                className="inline-flex items-center gap-2 px-8 py-4 text-[#2C2C2C] text-sm font-medium tracking-wide rounded-full border-2 hover:border-[#C9927A] hover:text-[#C9927A] transition-all"
+                href="/freebies"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border-2 text-sm font-semibold rounded-full hover:bg-[#2C2C2C] hover:text-white hover:border-[#2C2C2C] transition-all"
                 style={{
-                  borderColor: "#E8E0D8",
+                  borderColor: "#2C2C2C",
+                  color: "#2C2C2C",
                   fontFamily: "var(--font-ui)",
                 }}
               >
-                Shop All Designs
+                Download Free Checklist
               </Link>
             </motion.div>
 
-            {/* Social proof */}
+            {/* Key value props */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="flex items-center gap-4"
+              transition={{ delay: 0.7 }}
+              className="flex flex-wrap gap-x-6 gap-y-2"
             >
-              <div className="flex -space-x-2">
-                {(
-                  [
-                    ["#E8C4C4", "S"],
-                    ["#9BAD9B", "E"],
-                    ["#C4A55A", "M"],
-                    ["#E8D4B8", "A"],
-                    ["#9BBAD4", "J"],
-                  ] as [string, string][]
-                ).map(([c, letter], i) => (
-                  <div
-                    key={i}
-                    className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-[9px] text-white font-bold shadow-sm"
-                    style={{
-                      background: c,
-                      fontFamily: "var(--font-ui)",
-                    }}
-                  >
-                    {letter}
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div className="flex gap-0.5">
-                  {Array(5)
-                    .fill(0)
-                    .map((_, i) => (
-                      <span key={i} style={{ color: "#C4A55A", fontSize: 12 }}>
-                        ★
-                      </span>
-                    ))}
-                </div>
-                <p
-                  className="text-[10px] text-[#2C2C2C]/50 mt-0.5"
+              {[
+                ["↓", "Instant Download"],
+                ["✎", "Editable in Canva"],
+                ["✓", "Print at Home"],
+                ["♾", "Unlimited Prints"],
+              ].map(([icon, label]) => (
+                <div
+                  key={label}
+                  className="flex items-center gap-1.5 text-sm text-[#2C2C2C]/60"
                   style={{ fontFamily: "var(--font-ui)" }}
                 >
-                  Loved by 50,000+ mamas
-                </p>
-              </div>
+                  <span style={{ color: "#C9927A", fontWeight: "bold" }}>{icon}</span> {label}
+                </div>
+              ))}
             </motion.div>
           </motion.div>
 
-          {/* Right: Real photo collage */}
-          <div className="relative h-[500px] lg:h-[640px]">
-            {/* Main large photo */}
-            <motion.div
-              initial={{ opacity: 0, y: 20, rotate: -3 }}
-              animate={{ opacity: 1, y: 0, rotate: -3 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="absolute top-0 left-0 w-64 h-80 rounded-2xl overflow-hidden shadow-2xl"
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1519340333755-56e9c1d04579?w=600&q=80&fit=crop"
-                alt="Baby shower decor"
-                fill
-                className="object-cover"
-                sizes="256px"
-                priority
-              />
-              {/* Scrapbook tape */}
-              <div
-                className="absolute top-3 left-1/2 -translate-x-1/2 w-14 h-3.5 rounded-sm opacity-70"
-                style={{ background: "rgba(240,230,200,0.8)" }}
-              />
-            </motion.div>
+          {/* Right: product mockup collage */}
+          <div className="relative h-[520px] hidden lg:block">
+            {/* Invitation */}
+            <FloatingMockup
+              type="invitation"
+              accent="#C9927A"
+              bg="#FDF5EE"
+              title="Baby Shower"
+              className="w-44 h-60"
+              delay={0.3}
+              rotate={-4}
+              style={{ top: "20px", left: "40px" }}
+            />
 
-            {/* Second photo overlapping */}
-            <motion.div
-              initial={{ opacity: 0, y: 20, rotate: 4 }}
-              animate={{ opacity: 1, y: 0, rotate: 4 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="absolute top-24 right-0 w-56 h-72 rounded-2xl overflow-hidden shadow-xl"
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&q=80&fit=crop"
-                alt="Baby shower celebration"
-                fill
-                className="object-cover"
-                sizes="224px"
-              />
-            </motion.div>
+            {/* Bingo */}
+            <FloatingMockup
+              type="bingo"
+              accent="#9BAD9B"
+              bg="#F4F8F4"
+              className="w-48 h-52"
+              delay={0.5}
+              rotate={3}
+              style={{ top: "30px", right: "20px" }}
+            />
 
-            {/* Third photo bottom */}
-            <motion.div
-              initial={{ opacity: 0, y: 20, rotate: -2 }}
-              animate={{ opacity: 1, y: 0, rotate: -2 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="absolute bottom-8 left-12 w-52 h-60 rounded-2xl overflow-hidden shadow-xl"
-            >
-              <Image
-                src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&q=80&fit=crop"
-                alt="Baby shower balloons"
-                fill
-                className="object-cover"
-                sizes="208px"
-              />
-            </motion.div>
+            {/* Bundle */}
+            <FloatingMockup
+              type="bundle"
+              accent="#C4A55A"
+              bg="#FAF5EC"
+              title="Complete Bundle"
+              className="w-40 h-44"
+              delay={0.7}
+              rotate={-2}
+              style={{ bottom: "80px", left: "20px" }}
+            />
 
-            {/* Small product card overlay */}
+            {/* Sign */}
+            <FloatingMockup
+              type="sign"
+              accent="#9BAD9B"
+              bg="#F4F8F4"
+              title="Welcome Baby"
+              className="w-36 h-44"
+              delay={0.9}
+              rotate={5}
+              style={{ bottom: "60px", right: "40px" }}
+            />
+
+            {/* Checklist — center */}
+            <FloatingMockup
+              type="checklist"
+              accent="#C9927A"
+              bg="#FDF8F5"
+              className="w-44 h-52"
+              delay={1.1}
+              rotate={1}
+              style={{ top: "140px", left: "110px", zIndex: 10 }}
+            />
+
+            {/* Instant Download badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1, duration: 0.6 }}
-              className="absolute bottom-28 right-4 w-40 bg-white rounded-2xl shadow-2xl p-4"
-              style={{ border: "1px solid #F0EBE4" }}
-            >
-              <div className="relative w-full h-24 rounded-lg overflow-hidden mb-3">
-                <Image
-                  src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=300&q=80&fit=crop"
-                  alt="Template preview"
-                  fill
-                  className="object-cover"
-                  sizes="160px"
-                />
-                <div
-                  className="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-semibold"
-                  style={{
-                    background: "#E8F0E8",
-                    color: "#6A8A6A",
-                    fontFamily: "var(--font-ui)",
-                  }}
-                >
-                  Free
-                </div>
-              </div>
-              <p
-                className="text-xs font-medium text-[#2C2C2C]"
-                style={{ fontFamily: "var(--font-ui)" }}
-              >
-                Garden Floral Invite
-              </p>
-              <div className="flex items-center gap-1 mt-1">
-                <span style={{ color: "#C4A55A", fontSize: 10 }}>★★★★★</span>
-                <span
-                  className="text-[9px] text-[#2C2C2C]/40"
-                  style={{ fontFamily: "var(--font-ui)" }}
-                >
-                  248
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Download count badge */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.1 }}
-              className="absolute top-8 right-12 bg-white rounded-2xl shadow-lg px-4 py-3 flex items-center gap-3"
-              style={{ border: "1px solid #F0EBE4" }}
+              transition={{ delay: 1.3 }}
+              className="absolute flex items-center gap-2 bg-white rounded-2xl shadow-xl px-4 py-3"
+              style={{ top: "10px", left: "200px", border: "1px solid #F0EBE4", zIndex: 20 }}
             >
               <div
-                className="w-8 h-8 rounded-full flex items-center justify-center"
-                style={{ background: "#FDF5EE" }}
+                className="w-7 h-7 rounded-full flex items-center justify-center"
+                style={{ background: "#E8F4E8" }}
               >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#C9927A"
-                  strokeWidth="2"
-                >
-                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5A8A5A" strokeWidth="2.5">
+                  <polyline points="20 6 9 17 4 12" />
                 </svg>
               </div>
               <div>
-                <p
-                  className="text-sm font-bold text-[#2C2C2C]"
-                  style={{ fontFamily: "var(--font-ui)" }}
-                >
-                  50k+
+                <p className="text-xs font-semibold text-[#2C2C2C]" style={{ fontFamily: "var(--font-ui)" }}>
+                  Instant Download
                 </p>
-                <p
-                  className="text-[9px] text-[#2C2C2C]/40"
-                  style={{ fontFamily: "var(--font-ui)" }}
-                >
-                  Downloads
+                <p className="text-[9px] text-[#2C2C2C]/40" style={{ fontFamily: "var(--font-ui)" }}>
+                  PDF ready in seconds
                 </p>
               </div>
             </motion.div>
@@ -327,18 +258,10 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom wave */}
+      {/* Wave */}
       <div className="absolute bottom-0 left-0 right-0">
-        <svg
-          viewBox="0 0 1440 60"
-          fill="none"
-          preserveAspectRatio="none"
-          className="w-full h-12"
-        >
-          <path
-            d="M0 60 L0 30 Q360 0 720 30 Q1080 60 1440 30 L1440 60 Z"
-            fill="white"
-          />
+        <svg viewBox="0 0 1440 50" fill="none" preserveAspectRatio="none" className="w-full h-10">
+          <path d="M0 50L0 25Q360 0 720 25Q1080 50 1440 25L1440 50Z" fill="white" />
         </svg>
       </div>
     </section>

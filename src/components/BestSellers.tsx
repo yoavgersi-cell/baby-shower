@@ -2,19 +2,20 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import { products } from "@/data/products";
 
-export default function ShopTeaser() {
-  const featured = products.filter((p) => p.isFeatured).slice(0, 4);
+export default function BestSellers() {
+  const featured = products.filter((p) => p.isBestseller || p.isFeatured).slice(0, 6);
 
   return (
-    <section className="py-20 px-4 lg:px-8" style={{ background: "#FDFBF8" }}>
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20" style={{ background: "#FAF8F5" }}>
+      <div className="max-w-7xl mx-auto px-4 lg:px-8">
+        {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
           <div>
             <p
               className="text-[10px] tracking-[0.25em] uppercase text-[#C9927A] mb-2"
               style={{ fontFamily: "var(--font-ui)" }}
             >
-              Featured Products
+              Most Popular
             </p>
             <h2
               style={{
@@ -24,7 +25,7 @@ export default function ShopTeaser() {
                 color: "#2C2C2C",
               }}
             >
-              Shop Baby Shower Templates
+              Best Sellers
             </h2>
           </div>
           <Link
@@ -35,7 +36,8 @@ export default function ShopTeaser() {
             View All →
           </Link>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
           {featured.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
